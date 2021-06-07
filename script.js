@@ -56,6 +56,30 @@ let col6 = 0;
 
 
 
+function adicionarDisco(corDisco, coluna) {
+    let disco = document.createElement("div");
+    disco.classList.add("bola")
+    if (coluna.childElementCount < 6) {
+        if (corDisco % 2 === 0) {
+            disco.classList.add("bola-preta")
+        } else {
+            disco.classList.add("bola-vermelha")
+        }
+        coluna.prepend(disco);
+        acc++;
+    }
+}
+
+
+const criaListeners = document.querySelectorAll(".colunas").forEach(coluna => {
+    coluna.addEventListener("click", () => {
+        console.log(coluna.className);
+        switch (coluna) {
+        }
+        adicionarDisco(acc, coluna)
+    })
+})
+
 //  SECAO DE TESTES //
 
 
