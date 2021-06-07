@@ -1,0 +1,92 @@
+body, h1, div, p{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+:root {
+
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.container, .tabuleiro, .tabuleiro__selecao, .celula, .tabuleiro__campo-de-jogo {
+    border: 0.5px solid black;
+}
+
+.container {
+    width: 80%;
+    height: 80%;
+    margin: 0 auto;
+    max-width: 1200px;
+    max-height: 1200px;
+}
+
+h1 {
+    text-align: center;
+}
+
+.tabuleiro {
+    width: 100%;
+    height: 100%;
+}
+
+.tabuleiro__selecao {
+    width: 100%;
+    height: 25%;
+    display: flex;
+}
+
+.celula-superior {
+    display: flex;
+    flex-grow: 1;
+    height: 100%;
+    border: 1px solid black;
+}
+
+.tabuleiro__campo-de-jogo {
+    height: 75%;
+    display: flex;
+}
+
+.colunas {
+    width: 25%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    display: flex;
+    border: 1px solid black;
+    width: 14.28%;
+    align-items: flex-end;
+}
+
+.bola {
+
+}
+
+
+.bola-vermelha {
+
+}
+
+.bola-preta {
+
+}
+
+.celula {
+    width: 14.285% ;
+    height: 16.6666%;
+}
+
+footer {
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+}
+
