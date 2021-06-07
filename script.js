@@ -41,9 +41,10 @@ let col6 = 0;
         // iniciar linha e coluna em -1
 
 // funcao criar modal
-    // recebe vitoria vermelho, vitoria preto ou empate
+const criarModal = (ganhador) => {// recebe vitoria vermelho, vitoria preto ou empate
     // preenche modal de acordo com parametro recebido
-
+    
+}
 // SECAO GUSTAVO
 
 
