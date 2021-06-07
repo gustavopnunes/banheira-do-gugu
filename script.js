@@ -80,15 +80,18 @@ function adicionarDisco(corDisco, coluna) {
         }
         coluna.prepend(disco);
         acc++;
+        qtdBolas = parseInt(coluna.childElementCount-1);
+        console.log("linha " + qtdBolas)
+        coluna = parseInt(coluna.id);
+        console.log("coluna " + coluna);
+        mapeamento(coluna, qtdBolas)
     }
+    
 }
 
 
 const criaListeners = document.querySelectorAll(".colunas").forEach(coluna => {
     coluna.addEventListener("click", () => {
-        console.log(coluna.className);
-        switch (coluna) {
-        }
         adicionarDisco(acc, coluna)
     })
 })
