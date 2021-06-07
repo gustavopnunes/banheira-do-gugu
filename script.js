@@ -35,10 +35,23 @@ let col6 = 0;
 // SECAO VILSON 
 
 // função pra mapear a caixa e passar pro array 
-        // vai receber coluna e quantidade de bolas
-        // baseado na quantidade de bolas ela vai saber a linha
-        // alterar valores no array de acordo com coluna e linha
-        // iniciar linha e coluna em -1
+        
+const mapeamento = (coluna, bolasNaColuna) => { // vai receber coluna e quantidade de bolas
+    // baseado na quantidade de bolas ela vai saber a linha
+    // iniciar linha e coluna em -1
+    let linha = (mapa.length - 1) - bolasNaColuna 
+    let celula = mapa[linha][coluna]
+
+    // alterar valores no array de acordo com coluna e linha
+    if ( celula === "e") {
+        if( acc % 2 === 0 ) {
+            mapa[linha][coluna] = "p"
+        } else {
+            mapa[linha][coluna] = "v"
+        }
+    }
+
+}
 
 // funcao criar modal
 const criarModal = (ganhador) => {// recebe vitoria vermelho, vitoria preto ou empate
@@ -56,6 +69,33 @@ const criarModal = (ganhador) => {// recebe vitoria vermelho, vitoria preto ou e
     // retorna coluna e quantidade de bolas(linha) e chama a função de mapeamento
 
 
+
+function adicionarDisco(corDisco, coluna) {
+    let disco = document.createElement("div");
+    disco.classList.add("bola")
+    if (coluna.childElementCount < 6) {
+        if (corDisco % 2 === 0) {
+            disco.classList.add("bola-preta")
+        } else {
+            disco.classList.add("bola-vermelha")
+        }
+        coluna.prepend(disco);
+        acc++;
+        qtdBolas = parseInt(coluna.childElementCount-1);
+        console.log("linha " + qtdBolas)
+        coluna = parseInt(coluna.id);
+        console.log("coluna " + coluna);
+        mapeamento(coluna, qtdBolas)
+    }
+    
+}
+
+
+const criaListeners = document.querySelectorAll(".colunas").forEach(coluna => {
+    coluna.addEventListener("click", () => {
+        adicionarDisco(acc, coluna)
+    })
+})
 
 //  SECAO DE TESTES //
 
