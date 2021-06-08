@@ -152,7 +152,29 @@ const criarModal = (ganhador) => {// recebe vermelho, preto ou empate
     modal.classList.add("modal");
     modal.classList.add( ganhador )
     fundoModal.appendChild(modal)
+
+    let figure = document.createElement("figure")
+    modal.appendChild(figure)
     
+    let gif = document.createElement("img")
+    if ( ganhador === "empate" ) {
+        gif.src = "./assets/img/gugu-movimento.gif"
+        gif.alt = "Gugu fazerndo um movimento com a mão ao lado do vocalista do Mamonas Assassínas."
+    } else {
+        gif.src = "./assets/img/gugu.gif"
+        gif.alt = "Gugu arrepiado,com cara expressando êxtase."
+    }
+    figure.appendChild(gif)
+    
+    let figcaption = document.createElement("figcaption")
+    figcaption.classList.add("hidden")
+    if ( ganhador === "empate" ) {
+        figcaption.innerText = "Gugu fazendo movimento com a mão."
+    } else {
+        figcaption.innerText = "Gugu feliz."
+    }
+    figure.appendChild(figcaption)
+
     let text = document.createElement("p");
     // preenche modal de acordo com parametro recebido
     if ( ganhador === "vermelho" ) {
@@ -170,6 +192,11 @@ const criarModal = (ganhador) => {// recebe vermelho, preto ou empate
 
     button.addEventListener("click", () => {
         let getModal = document.querySelector(".modal-fundo");
+        let bolas = document.querySelectorAll(".bola")
+        for ( let i = 0; i < bolas.length; i++ ) {
+            bolas[i].remove()
+        }
+        acc = 0;
         return getModal.remove()
     })
 
