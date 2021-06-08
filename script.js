@@ -173,7 +173,7 @@ function adicionarDisco(coluna) {
     coluna.prepend(disco);
     disco = document.createElement("div");
     acc++;
-    
+    verificaVitoria(linha, coluna, acc)
     suspenderDisco(acc, coluna);
     coluna = parseInt(coluna.id);
     console.log("coluna " + coluna);
