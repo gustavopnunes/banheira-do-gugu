@@ -22,13 +22,102 @@ let qtdBolasNasColunas = [0, 0, 0, 0, 0, 0, 0];
 
 // SECAO FELIPE //
 
-
 // função verificadora de vitória
     //  executa após cada mapeamento
     //  recebe array e procura por condicoes de vitória
     //  retorna vitoria ou nada (em caso de nada, segue o jogo)
     //  em caso de vitoria, chama um modal
 
+function verificaVitoria(linha, coluna, acc){
+    let acc1=0;
+    let ganhador='';
+    let indiceLinha=0;
+    let indiceColuna=0;
+    let x='';
+    let y='';
+    let p=0;
+    let v=0;
+    if( acc===42){
+        ganhador='empate'; criarModal(ganhador);
+    }
+    for (let i=0; i<7; i++){ //verificação para linha
+        if (mapa[5-linha][i] === mapa[5-linha][i+1] && mapa[5-linha][i]!=='e'){
+            acc1++;
+        }else{
+            acc1=0;
+        }
+        if (acc1===3){
+            if(mapa[5-linha][i-1]==='v'){ganhador='vermelho'; criarModal(ganhador);}
+            if(mapa[5-linha][i-1]==='p'){ganhador='preto'; criarModal(ganhador);}    
+        }
+    }
+    for (let i=0; i<5; i++){ // verificação para coluna
+        if (mapa[i][coluna] === mapa[i+1][coluna] && mapa[i][coluna]!=='e'){
+            acc1++
+        }else{
+            acc1=0
+        }
+        if (acc1===3){
+            if(mapa [i-1][coluna]==='v'){ganhador = 'vermelho'; criarModal(ganhador);}
+            if(mapa [i-1][coluna]==='p'){ganhador = 'preto'; criarModal(ganhador);}
+        }
+    }
+    // lógica para verificação de diagonais:
+
+    // diagonal principal:
+    for (let i=0; i<7; i++){
+        if((5-linha+i)<6 && (coluna+i)<7){
+            if (mapa[5-linha+i][coluna+i]!=='e'){
+                indiceLinha=5-linha+i;
+                indiceColuna=coluna+i;
+            }
+        }
+    }
+    console.log('indiceLinha: '+indiceLinha+', indiceColuna: '+indiceColuna)
+    for (let i=0; i<7; i++){
+        if ((indiceLinha-i)>=0 && (indiceColuna-i)>=0 && mapa[indiceLinha-i][indiceColuna-i]==='p'){
+            p++;
+            v=0;
+        }else if((indiceLinha-i)>=0 && (indiceColuna-i)>=0 && mapa[indiceLinha-i][indiceColuna-i]==='v'){
+            v++;
+            p=0;
+        }        
+        if(v>3){
+            ganhador = 'vermelho'; 
+            criarModal(ganhador);
+        }else if(p>3){
+            ganhador = 'preto';
+            criarModal(ganhador);
+        }
+    }
+    p=0;
+    v=0;
+    // diagonal oposta:
+    for (let i=0; i<7; i++){
+        if((5-linha-i)>=0 && (coluna+i)<7){
+            if (mapa[5-linha-i][coluna+i]!=='e'){
+                indiceLinha=5-linha-i
+                indiceColuna=coluna+i;
+            }
+        }
+    }
+    for (let i=0; i<7; i++){
+        if ((indiceLinha+i)<6 && (indiceColuna-i)>=0 && mapa[indiceLinha+i][indiceColuna-i]==='p'){
+            p++
+            v=0;
+        }else if(p>3){
+            ganhador='preto';
+            criarModal(ganhador);
+        }
+        if ((indiceLinha+i)<6 && (indiceColuna-i)>=0 && mapa[indiceLinha+i][indiceColuna-i]==='v'){
+            v++
+            p=0;
+        }else if(v>3){
+            ganhador='vermelho';
+            criarModal(ganhador);
+        }
+    }
+}
 
 // SECAO VILSON 
 
@@ -173,23 +262,18 @@ function adicionarDisco(coluna) {
     coluna.prepend(disco);
     disco = document.createElement("div");
     acc++;
-    verificaVitoria(linha, coluna, acc)
     suspenderDisco(acc, coluna);
     coluna = parseInt(coluna.id);
     console.log("coluna " + coluna);
     qtdBolasNasColunas[coluna]++;
     console.log(qtdBolasNasColunas);
     mapeamento(coluna, linha);
+    setTimeout(function() {
+        verificaVitoria(linha, coluna, acc);
+    },800);
+    
 }
 
 //  SECAO DE TESTES //
 
 
-
-// branches_features
-// toda vez que der push comunicar geral
-// 
-
-
-
-    
