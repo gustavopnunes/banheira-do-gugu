@@ -111,7 +111,6 @@ function adicionarDisco(corDisco, coluna) {
             disco.classList.add("bola-vermelha")
         }
         coluna.prepend(disco);  // adiciona o disco de cima pra baixo e incrementa contador
-        acc++;
         // daqui pra baixo, a funcao converte as propriedades da coluna atual para inteiros e chama
         // a funcao de mapeamento passando essas propriedades como parametro, alem de atualizar a quantidade de bolas
         // na coluna atual la no array.
@@ -122,6 +121,7 @@ function adicionarDisco(corDisco, coluna) {
         console.log("coluna " + coluna);
         qtdBolasNasColunas[coluna]++;
         mapeamento(coluna, linha)
+        acc++;
         console.log(qtdBolasNasColunas)
     }
     
