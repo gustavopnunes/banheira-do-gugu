@@ -13,6 +13,7 @@ let acc = 0; // contador. Vai até 42 (empate). Par é preto, impar é vermelho
 // posicao representa uma coluna de 0 a 6 /Gustavo
 let qtdBolasNasColunas = [0, 0, 0, 0, 0, 0, 0];
 
+
 // comecar com a preta
 
 // e = espaco vazio
@@ -95,39 +96,78 @@ const criarModal = (ganhador) => {// recebe vermelho, preto ou empate
         // se não não faz nada
     // retorna coluna e quantidade de bolas(linha) e chama a função de mapeamento
 
-    const criaListeners = document.querySelectorAll(".colunas").forEach(coluna => {
-        coluna.addEventListener("click", () => {
-            adicionarDisco(acc, coluna)
-        });
-    });
+    // const criaListeners = document.querySelectorAll(".colunas").forEach(coluna => {
+    //     coluna.addEventListener("click", () => {
+    //         adicionarDisco(acc, coluna)
+    //     });
+    // });
 
-function adicionarDisco(corDisco, coluna) {
-    let disco = document.createElement("div");
-    disco.classList.add("bola")
-    if (coluna.childElementCount < 6) {  // só deixa adicionar o disco se a coluna tiver menos que 6 discos
-        if (corDisco % 2 === 0) {       // define cor de acordo com valor do acumulador (par = preta, impar = vermelha)
-            disco.classList.add("bola-preta")
-        } else {
-            disco.classList.add("bola-vermelha")
-        }
-        coluna.prepend(disco);  // adiciona o disco de cima pra baixo e incrementa contador
-        // daqui pra baixo, a funcao converte as propriedades da coluna atual para inteiros e chama
-        // a funcao de mapeamento passando essas propriedades como parametro, alem de atualizar a quantidade de bolas
-        // na coluna atual la no array.
-        linha = parseInt(coluna.childElementCount-1); // detecta o numero da linha pela quantidade de bolas nela.  
-        // o "-1" aí em cima é porque a linha vai ser sempre quantidade de elementos (discos) -1
-        console.log("linha " + linha)
-        coluna = parseInt(coluna.id);
-        console.log("coluna " + coluna);
-        qtdBolasNasColunas[coluna]++;
-        mapeamento(coluna, linha)
-        acc++;
-        console.log(qtdBolasNasColunas)
+// function adicionarDisco(corDisco, coluna) {
+//     let disco = document.createElement("div");
+//     let alturaAnimacao = 500;
+//     disco.classList.add("bola")
+//     if (coluna.childElementCount < 6) {  // só deixa adicionar o disco se a coluna tiver menos que 6 discos
+//         if (corDisco % 2 === 0) {       // define cor de acordo com valor do acumulador (par = preta, impar = vermelha)
+//             disco.classList.add("bola-preta")
+//         } else {
+//             disco.classList.add("bola-vermelha")
+//         }
+//         let root = document.documentElement;
+//         // esse arranjo tecnico ai em baixo corrige a altura de animacao das bolas, pra elas cairem sempre a partir do mesmo ponto
+//         root.style.setProperty("--altura-animacao", `translateY(-${(alturaAnimacao-100*coluna.childElementCount)}%`);
+//         coluna.prepend(disco);  // adiciona o disco de cima pra baixo e incrementa contador
+//         // daqui pra baixo, a funcao converte as propriedades da coluna atual para inteiros e chama
+//         // a funcao de mapeamento passando essas propriedades como parametro, alem de atualizar a quantidade de bolas
+//         // na coluna atual la no array.
+//         linha = parseInt(coluna.childElementCount-1); // detecta o numero da linha pela quantidade de bolas nela.  
+//         // o "-1" aí em cima é porque a linha vai ser sempre quantidade de elementos (discos) -1
+//         console.log("linha " + linha)
+//         coluna = parseInt(coluna.id);
+//         console.log("coluna " + coluna);
+//         qtdBolasNasColunas[coluna]++;
+//         mapeamento(coluna, linha)
+//         acc++;
+//         console.log(qtdBolasNasColunas)
+//     } 
+// }
+
+let disco = document.createElement("div");
+function suspenderDisco(corDisco, coluna) {
+    if (acc % 2 === 0) {       // define cor de acordo com valor do acumulador (par = preta, impar = vermelha)
+        disco.classList.add("bola-preta")
+    } else {
+        disco.classList.add("bola-vermelha")
     }
-    
+    disco.classList.add("disco-suspenso");
+    disco.id = "disco-suspenso"
+    coluna.append(disco);
 }
 
+function adicionarDisco(coluna) {
+    if (!disco.classList.contains("disco-suspenso") || (coluna.childElementCount > 6)) {
+        console.log("disco sem classe ou coluna cheia. Impedindo de adicionar");
+        return;
+    };
 
+    let alturaAnimacao = 500;
+    let root = document.documentElement;
+    root.style.setProperty("--altura-animacao", `translateY(-${(alturaAnimacao-100*coluna.childElementCount)}%`);
+    disco.removeAttribute("id")
+    disco.classList.remove("disco-suspenso");
+    disco.classList.add("bola");
+    let linha = parseInt(coluna.childElementCount-1); // detecta o numero da linha pela quantidade de bolas nela.  
+    console.log("linha " + linha)
+    coluna.prepend(disco);
+    disco = document.createElement("div");
+    acc++;
+    
+    suspenderDisco(acc, coluna);
+    coluna = parseInt(coluna.id);
+    console.log("coluna " + coluna);
+    qtdBolasNasColunas[coluna]++;
+    console.log(qtdBolasNasColunas);
+    mapeamento(coluna, linha);
+}
 
 //  SECAO DE TESTES //
 
@@ -136,3 +176,18 @@ function adicionarDisco(corDisco, coluna) {
 // branches_features
 // toda vez que der push comunicar geral
 // 
+
+const maisListeners = document.querySelectorAll(".colunas").forEach(coluna => {
+        coluna.addEventListener("mouseenter", () => {
+            suspenderDisco(acc, coluna)
+        });
+    });
+
+
+const criaListeners = document.querySelectorAll(".colunas").forEach(coluna => {
+        coluna.addEventListener("click", () => {
+            adicionarDisco(coluna)
+        });
+    });
+
+    
