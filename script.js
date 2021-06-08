@@ -54,10 +54,40 @@ const mapeamento = (coluna, bolasNaColuna) => { // vai receber coluna e quantida
 }
 
 // funcao criar modal
-const criarModal = (ganhador) => {// recebe vitoria vermelho, vitoria preto ou empate
-    // preenche modal de acordo com parametro recebido
+const criarModal = (ganhador) => {// recebe vermelho, preto ou empate
+    let myBody = document.querySelector("body")
+
+    let fundoModal = document.createElement("div")
+    fundoModal.classList.add("modal-fundo");
+    myBody.appendChild(fundoModal);
     
+    let modal = document.createElement("div");
+    modal.classList.add("modal");
+    modal.classList.add( ganhador )
+    fundoModal.appendChild(modal)
+    
+    let text = document.createElement("p");
+    // preenche modal de acordo com parametro recebido
+    if ( ganhador === "vermelho" ) {
+        text.innerText = "O jogador vermelho venceu!"
+    } else if ( ganhador === "preto" ) {
+        text.innerText = "O jogador preto venceu!"
+    } else {
+        text.innerText = "Todo mundo saiu perdendo e você é um Bananão"
+    }
+    modal.appendChild(text)
+
+    let button = document.createElement("button");
+    button.innerText = "Jogar novamente"
+    modal.appendChild(button)
+
+    button.addEventListener("click", () => {
+        let getModal = document.querySelector(".modal-fundo");
+        return getModal.remove()
+    })
+
 }
+
 // SECAO GUSTAVO
 
 
