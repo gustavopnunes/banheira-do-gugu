@@ -131,6 +131,19 @@ const criarModal = (ganhador) => {// recebe vermelho, preto ou empate
 //     } 
 // }
 
+const maisListeners = document.querySelectorAll(".colunas").forEach(coluna => {
+    coluna.addEventListener("mouseenter", () => {
+        suspenderDisco(acc, coluna)
+    });
+});
+
+
+const criaListeners = document.querySelectorAll(".colunas").forEach(coluna => {
+    coluna.addEventListener("click", () => {
+        adicionarDisco(coluna)
+    });
+});
+
 let disco = document.createElement("div");
 function suspenderDisco(corDisco, coluna) {
     if (acc % 2 === 0) {       // define cor de acordo com valor do acumulador (par = preta, impar = vermelha)
@@ -177,17 +190,6 @@ function adicionarDisco(coluna) {
 // toda vez que der push comunicar geral
 // 
 
-const maisListeners = document.querySelectorAll(".colunas").forEach(coluna => {
-        coluna.addEventListener("mouseenter", () => {
-            suspenderDisco(acc, coluna)
-        });
-    });
 
-
-const criaListeners = document.querySelectorAll(".colunas").forEach(coluna => {
-        coluna.addEventListener("click", () => {
-            adicionarDisco(coluna)
-        });
-    });
 
     

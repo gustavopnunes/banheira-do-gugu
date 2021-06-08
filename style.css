@@ -9,7 +9,7 @@ body, h1, div, p{
 }
 
 :root {
-    --altura-animacao:;
+    --altura-animacao:500;
 }
 
 body {
