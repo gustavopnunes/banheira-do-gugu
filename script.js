@@ -297,10 +297,13 @@ function adicionarDisco(coluna) {
     mapeamento(coluna, linha);
     setTimeout(function() {
         verificaVitoria(linha, coluna, acc);
-    },800);
+    },(1000 - qtdBolasNasColunas[coluna]*100));
     
 }
 
 //  SECAO DE TESTES //
 
-
+//to do: 
+// acertar tempo de disparo da funcao de vitoria
+    // usar variavel que começa em 1 segundo e vai reduzindo conforme qtd de bolas
+    // mesmo esquema da altura da bola na animacao
