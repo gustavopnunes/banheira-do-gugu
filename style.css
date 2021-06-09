@@ -19,10 +19,6 @@ body {
     background-color: rgb(173, 173, 173);
 }
 
-.tabuleiro, .tabuleiro__selecao, .celula, .tabuleiro__campo-de-jogo {
-    border: 0.5px solid black;
-}
-
 .container {
     width: 288px;
     height: 184px;
