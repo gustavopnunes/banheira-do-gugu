@@ -303,7 +303,4 @@ function adicionarDisco(coluna) {
 
 //  SECAO DE TESTES //
 
-//to do: 
-// acertar tempo de disparo da funcao de vitoria
-    // usar variavel que começa em 1 segundo e vai reduzindo conforme qtd de bolas
-    // mesmo esquema da altura da bola na animacao
+//  to do: 
