@@ -132,9 +132,9 @@ const mapeamento = (coluna, bolasNaColuna) => { // vai receber coluna e quantida
     // alterar valores no array de acordo com coluna e linha
     if ( celula === "e") {
         if( acc % 2 === 0 ) {
-            mapa[linha][coluna] = "p"
+            mapa[linha][coluna] = "b"
         } else {
-            mapa[linha][coluna] = "v"
+            mapa[linha][coluna] = "y"
         }
     }
 
@@ -177,10 +177,10 @@ const criarModal = (ganhador) => {// recebe vermelho, preto ou empate
 
     let text = document.createElement("p");
     // preenche modal de acordo com parametro recebido
-    if ( ganhador === "vermelho" ) {
-        text.innerText = "O jogador vermelho venceu!"
-    } else if ( ganhador === "preto" ) {
-        text.innerText = "O jogador preto venceu!"
+    if ( ganhador === "azul" ) {
+        text.innerText = "Ponto para as mulheres!"
+    } else if ( ganhador === "amarelo" ) {
+        text.innerText = "Ponto para os homens!"
     } else {
         text.innerText = "Todo mundo saiu perdendo e você é um Bananão"
     }
@@ -203,7 +203,49 @@ const criarModal = (ganhador) => {// recebe vermelho, preto ou empate
         return getModal.remove()
     })
 
+    if (ganhador === "vermelho") {
+        playAudio("ponto")
+    }
+    else if ( ganhador === "preto" ) {
+        playAudio("ponto-mulheres")
+    }
+    else {
+        playAudio("")
+    }
+
 }
+
+const playAudio = (audio) => {
+
+    const audioContainer = document.querySelector(".audio-container")
+    
+    //Se tiver alguma tag audio com o id audio-frase ele é deletado
+    let audioFrase = document.querySelector("#audio-frase")
+    if ( audioFrase !== null ) {
+        audioFrase.remove()
+    }
+
+    let novoAudio = document.createElement("audio");
+    novoAudio.id = "audio-frase"
+    audioContainer.appendChild(novoAudio);
+
+    let sourceFrase = document.createElement("source");
+    sourceFrase.type = "audio/mpeg"
+
+    sourceFrase.src = `./assets/audio/${audio}.mp3`
+    
+    novoAudio.appendChild(sourceFrase)
+
+    audioFrase = document.querySelector("#audio-frase")
+
+    return audioFrase.play()
+}
+
+const titulo = document.querySelector(".titulo")
+
+titulo.addEventListener("click", () => {
+    playAudio("domingo-legal")
+})
 
 // SECAO GUSTAVO
 
@@ -292,6 +334,9 @@ function adicionarDisco(coluna) {
     coluna.prepend(disco);
     disco = document.createElement("div");
     acc++;
+    if ( acc === 1 ) {
+        playAudio("valendo")
+    }
     suspenderDisco(acc, coluna);
     coluna = parseInt(coluna.id);
     console.log("coluna " + coluna);
