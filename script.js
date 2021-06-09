@@ -36,9 +36,10 @@ function verificaVitoria(linha, coluna, acc){
     let x='';
     let y=0;
     let b=0;
+    let z = 0;
     console.log(acc)
     if( acc===42){
-        ganhador='empate'; criarModal(ganhador);
+        ganhador='empate'; criarModal(ganhador); z = 1;
     }
     for (let i=0; i<7; i++){ //verificação para linha
         if (mapa[5-linha][i] === mapa[5-linha][i+1] && mapa[5-linha][i]!=='e'){
@@ -49,8 +50,8 @@ function verificaVitoria(linha, coluna, acc){
         }
         if (acc1===2 && x==='e'){playAudio("TaTerminando")} 
         if (acc1===3){
-            if(mapa[5-linha][i-1]==='y'){ganhador='amarelo'; criarModal(ganhador);}
-            if(mapa[5-linha][i-1]==='b'){ganhador='azul'; criarModal(ganhador);}    
+            if(mapa[5-linha][i-1]==='y'){ganhador='amarelo'; criarModal(ganhador); z = 1;}
+            if(mapa[5-linha][i-1]==='b'){ganhador='azul'; criarModal(ganhador); z = 1;}    
         }
     }
     x='';
@@ -64,8 +65,8 @@ function verificaVitoria(linha, coluna, acc){
         }
         if (acc1===2 && x==='e'){playAudio("TaTerminando")} 
         if (acc1===3){
-            if(mapa [i-1][coluna]==='y'){ganhador = 'amarelo'; criarModal(ganhador);}
-            if(mapa [i-1][coluna]==='b'){ganhador = 'azul'; criarModal(ganhador);}
+            if(mapa [i-1][coluna]==='y'){ganhador = 'amarelo'; criarModal(ganhador); z = 1}
+            if(mapa [i-1][coluna]==='b'){ganhador = 'azul'; criarModal(ganhador); z = 1;}
         }
     }
     // lógica para verificação de diagonais:
@@ -91,9 +92,11 @@ function verificaVitoria(linha, coluna, acc){
         if(y>3){
             ganhador = 'amarelo'; 
             criarModal(ganhador);
+            z = 1;
         }else if(b>3){
             ganhador = 'azul';
             criarModal(ganhador);
+            z = 1;
         }
     }
     y=0;
@@ -120,18 +123,18 @@ function verificaVitoria(linha, coluna, acc){
         if (b===3 || y===3){playAudio("TaTerminando")}
         if(b>3){
             ganhador='azul';
-            criarModal(ganhador);
+            criarModal(ganhador); z = 1;
         }else if(y>3){
             ganhador='amarelo';
-            criarModal(ganhador);
+            criarModal(ganhador); z = 1;
         }
     }
 
-    if( acc===7){playAudio('JaPegouUm')}
-    if( acc===4 || acc===18 || acc===26){playAudio('ElaEhForte');}
-    if( acc===9){playAudio('EhPraValer');}
-    if( acc===14){playAudio('CadeORelogio');}
-    if( acc===23){playAudio('OpaMaisUm');}
+    if( z === 0 && acc===7){playAudio('JaPegouUm')}
+    if( z === 0 && acc===4 || acc===18 || acc===26){playAudio('ElaEhForte');}
+    if( z === 0 && acc===9){playAudio('EhPraValer');}
+    if( z === 0 && acc===14){playAudio('CadeORelogio');}
+    if( z === 0 && acc===23){playAudio('OpaMaisUm');}
 }
 // SECAO VILSON 
 
@@ -246,7 +249,7 @@ const playAudio = (audio) => {
     sourceFrase.type = "audio/mpeg"
 
     sourceFrase.src = `./assets/audio/${audio}.mp3`
-    
+     
     novoAudio.appendChild(sourceFrase)
 
     audioFrase = document.querySelector("#audio-frase")
@@ -254,7 +257,7 @@ const playAudio = (audio) => {
     return audioFrase.play()
 }
 
-const titulo = document.querySelector(".titulo")
+const titulo = document.querySelector(".logo")
 
 titulo.addEventListener("click", () => {
     playAudio("domingo-legal")
