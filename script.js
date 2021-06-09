@@ -33,10 +33,8 @@ function verificaVitoria(linha, coluna, acc){
     let ganhador='';
     let indiceLinha=0;
     let indiceColuna=0;
-    let x='';
-    let y='';
-    let p=0;
-    let v=0;
+    let y=0;
+    let b=0;
     if( acc===42){
         ganhador='empate'; criarModal(ganhador);
     }
@@ -46,9 +44,10 @@ function verificaVitoria(linha, coluna, acc){
         }else{
             acc1=0;
         }
+        if (acc1===2){playAudio("TaTerminando")} 
         if (acc1===3){
-            if(mapa[5-linha][i-1]==='v'){ganhador='vermelho'; criarModal(ganhador);}
-            if(mapa[5-linha][i-1]==='p'){ganhador='preto'; criarModal(ganhador);}    
+            if(mapa[5-linha][i-1]==='y'){ganhador='amarelo'; criarModal(ganhador);}
+            if(mapa[5-linha][i-1]==='b'){ganhador='azul'; criarModal(ganhador);}    
         }
     }
     for (let i=0; i<5; i++){ // verificação para coluna
@@ -57,9 +56,10 @@ function verificaVitoria(linha, coluna, acc){
         }else{
             acc1=0
         }
+        if (acc1===2){playAudio("TaTerminando")} 
         if (acc1===3){
-            if(mapa [i-1][coluna]==='v'){ganhador = 'vermelho'; criarModal(ganhador);}
-            if(mapa [i-1][coluna]==='p'){ganhador = 'preto'; criarModal(ganhador);}
+            if(mapa [i-1][coluna]==='y'){ganhador = 'amarelo'; criarModal(ganhador);}
+            if(mapa [i-1][coluna]==='b'){ganhador = 'azul'; criarModal(ganhador);}
         }
     }
     // lógica para verificação de diagonais:
@@ -73,20 +73,20 @@ function verificaVitoria(linha, coluna, acc){
             }
         }
     }
-    console.log('indiceLinha: '+indiceLinha+', indiceColuna: '+indiceColuna)
     for (let i=0; i<7; i++){
-        if ((indiceLinha-i)>=0 && (indiceColuna-i)>=0 && mapa[indiceLinha-i][indiceColuna-i]==='p'){
-            p++;
-            v=0;
-        }else if((indiceLinha-i)>=0 && (indiceColuna-i)>=0 && mapa[indiceLinha-i][indiceColuna-i]==='v'){
-            v++;
-            p=0;
-        }        
-        if(v>3){
-            ganhador = 'vermelho'; 
+        if ((indiceLinha-i)>=0 && (indiceColuna-i)>=0 && mapa[indiceLinha-i][indiceColuna-i]==='b'){
+            b++;
+            y=0;
+        }else if((indiceLinha-i)>=0 && (indiceColuna-i)>=0 && mapa[indiceLinha-i][indiceColuna-i]==='y'){
+            y++;
+            b=0;
+        }
+        if (b===3 || y===3){playAudio("TaTerminando")}        
+        if(y>3){
+            ganhador = 'amarelo'; 
             criarModal(ganhador);
-        }else if(p>3){
-            ganhador = 'preto';
+        }else if(b>3){
+            ganhador = 'azul';
             criarModal(ganhador);
         }
     }
@@ -102,18 +102,20 @@ function verificaVitoria(linha, coluna, acc){
         }
     }
     for (let i=0; i<7; i++){
-        if ((indiceLinha+i)<6 && (indiceColuna-i)>=0 && mapa[indiceLinha+i][indiceColuna-i]==='p'){
-            p++
-            v=0;
-        }else if(p>3){
-            ganhador='preto';
+        if ((indiceLinha+i)<6 && (indiceColuna-i)>=0 && mapa[indiceLinha+i][indiceColuna-i]==='b'){
+            b++
+            y=0;
+        }else if (b===3){playAudio("TaTerminando")
+        }else if(b>3){
+            ganhador='azul';
             criarModal(ganhador);
         }
-        if ((indiceLinha+i)<6 && (indiceColuna-i)>=0 && mapa[indiceLinha+i][indiceColuna-i]==='v'){
-            v++
-            p=0;
-        }else if(v>3){
-            ganhador='vermelho';
+        if ((indiceLinha+i)<6 && (indiceColuna-i)>=0 && mapa[indiceLinha+i][indiceColuna-i]==='y'){
+            y++
+            b=0;
+        }else if (y===3){playAudio("TaTerminando")
+        }else if(y>3){
+            ganhador='amarelo';
             criarModal(ganhador);
         }
     }
