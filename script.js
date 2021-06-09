@@ -261,7 +261,7 @@ const playAudio = (audio) => {
     return audioFrase.play()
 }
 
-const titulo = document.querySelector(".titulo")
+const titulo = document.querySelector(".logo")
 
 titulo.addEventListener("click", () => {
     playAudio("domingo-legal")
