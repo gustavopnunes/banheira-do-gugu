@@ -33,30 +33,36 @@ function verificaVitoria(linha, coluna, acc){
     let ganhador='';
     let indiceLinha=0;
     let indiceColuna=0;
+    let x='';
     let y=0;
     let b=0;
+    console.log(acc)
     if( acc===42){
         ganhador='empate'; criarModal(ganhador);
     }
     for (let i=0; i<7; i++){ //verificação para linha
         if (mapa[5-linha][i] === mapa[5-linha][i+1] && mapa[5-linha][i]!=='e'){
             acc1++;
+            x=mapa[5-linha][i+2];
         }else{
             acc1=0;
         }
-        if (acc1===2){playAudio("TaTerminando")} 
+        if (acc1===2 && x==='e'){playAudio("TaTerminando")} 
         if (acc1===3){
             if(mapa[5-linha][i-1]==='y'){ganhador='amarelo'; criarModal(ganhador);}
             if(mapa[5-linha][i-1]==='b'){ganhador='azul'; criarModal(ganhador);}    
         }
     }
-    for (let i=0; i<5; i++){ // verificação para coluna
-        if (mapa[i][coluna] === mapa[i+1][coluna] && mapa[i][coluna]!=='e'){
+    x='';
+    acc1=0;
+    for (let i=5; i>00; i--){ // verificação para coluna
+        if (mapa[i][coluna] === mapa[i-1][coluna] && mapa[i][coluna]!=='e'){
             acc1++
+            x=mapa[i-2][coluna];
         }else{
-            acc1=0
+            acc1=0;
         }
-        if (acc1===2){playAudio("TaTerminando")} 
+        if (acc1===2 && x==='e'){playAudio("TaTerminando")} 
         if (acc1===3){
             if(mapa [i-1][coluna]==='y'){ganhador = 'amarelo'; criarModal(ganhador);}
             if(mapa [i-1][coluna]==='b'){ganhador = 'azul'; criarModal(ganhador);}
@@ -90,8 +96,8 @@ function verificaVitoria(linha, coluna, acc){
             criarModal(ganhador);
         }
     }
-    p=0;
-    v=0;
+    y=0;
+    b=0;
     // diagonal oposta:
     for (let i=0; i<7; i++){
         if((5-linha-i)>=0 && (coluna+i)<7){
@@ -101,26 +107,32 @@ function verificaVitoria(linha, coluna, acc){
             }
         }
     }
+
     for (let i=0; i<7; i++){
         if ((indiceLinha+i)<6 && (indiceColuna-i)>=0 && mapa[indiceLinha+i][indiceColuna-i]==='b'){
             b++
             y=0;
-        }else if (b===3){playAudio("TaTerminando")
-        }else if(b>3){
-            ganhador='azul';
-            criarModal(ganhador);
         }
         if ((indiceLinha+i)<6 && (indiceColuna-i)>=0 && mapa[indiceLinha+i][indiceColuna-i]==='y'){
             y++
             b=0;
-        }else if (y===3){playAudio("TaTerminando")
+        }
+        if (b===3 || y===3){playAudio("TaTerminando")}
+        if(b>3){
+            ganhador='azul';
+            criarModal(ganhador);
         }else if(y>3){
             ganhador='amarelo';
             criarModal(ganhador);
         }
     }
-}
 
+    if( acc===7){playAudio('JaPegouUm')}
+    if( acc===4 || acc===18 || acc===26){playAudio('ElaEhForte');}
+    if( acc===9){playAudio('EhPraValer');}
+    if( acc===14){playAudio('CadeORelogio');}
+    if( acc===23){playAudio('OpaMaisUm');}
+}
 // SECAO VILSON 
 
 // função pra mapear a caixa e passar pro array 
@@ -134,12 +146,11 @@ const mapeamento = (coluna, bolasNaColuna) => { // vai receber coluna e quantida
     // alterar valores no array de acordo com coluna e linha
     if ( celula === "e") {
         if( acc % 2 === 0 ) {
-            mapa[linha][coluna] = "p"
+            mapa[linha][coluna] = "y"
         } else {
-            mapa[linha][coluna] = "v"
+            mapa[linha][coluna] = "b"
         }
     }
-
 }
 
 // funcao criar modal
@@ -179,10 +190,10 @@ const criarModal = (ganhador) => {// recebe vermelho, preto ou empate
 
     let text = document.createElement("p");
     // preenche modal de acordo com parametro recebido
-    if ( ganhador === "vermelho" ) {
-        text.innerText = "O jogador vermelho venceu!"
-    } else if ( ganhador === "preto" ) {
-        text.innerText = "O jogador preto venceu!"
+    if ( ganhador === "azul" ) {
+        text.innerText = "Ponto para os homens!"
+    } else if ( ganhador === "amarelo" ) {
+        text.innerText = "Ponto para as mulheres!"
     } else {
         text.innerText = "Todo mundo saiu perdendo e você é um Bananão"
     }
@@ -199,10 +210,55 @@ const criarModal = (ganhador) => {// recebe vermelho, preto ou empate
             bolas[i].remove()
         }
         acc = 0;
+        for ( let i = 0; i < mapa.length; i++ ) {
+           mapa[i] = mapa[i].map( (item) => item = "e" )
+        }
         return getModal.remove()
     })
 
+    if (ganhador === "azul") {
+        playAudio("ponto")
+    }
+    else if ( ganhador === "amarelo" ) {
+        playAudio("ponto-mulheres")
+    }
+    else {
+        playAudio("")
+    }
+
 }
+
+const playAudio = (audio) => {
+
+    const audioContainer = document.querySelector(".audio-container")
+    
+    //Se tiver alguma tag audio com o id audio-frase ele é deletado
+    let audioFrase = document.querySelector("#audio-frase")
+    if ( audioFrase !== null ) {
+        audioFrase.remove()
+    }
+
+    let novoAudio = document.createElement("audio");
+    novoAudio.id = "audio-frase"
+    audioContainer.appendChild(novoAudio);
+
+    let sourceFrase = document.createElement("source");
+    sourceFrase.type = "audio/mpeg"
+
+    sourceFrase.src = `./assets/audio/${audio}.mp3`
+    
+    novoAudio.appendChild(sourceFrase)
+
+    audioFrase = document.querySelector("#audio-frase")
+
+    return audioFrase.play()
+}
+
+const titulo = document.querySelector(".titulo")
+
+titulo.addEventListener("click", () => {
+    playAudio("domingo-legal")
+})
 
 // SECAO GUSTAVO
 
@@ -291,6 +347,9 @@ function adicionarDisco(coluna) {
     coluna.prepend(disco);
     disco = document.createElement("div");
     acc++;
+    if ( acc === 1 ) {
+        playAudio("valendo")
+    }
     suspenderDisco(acc, coluna);
     coluna = parseInt(coluna.id);
     console.log("coluna " + coluna);
@@ -305,7 +364,4 @@ function adicionarDisco(coluna) {
 
 //  SECAO DE TESTES //
 
-//to do: 
-// acertar tempo de disparo da funcao de vitoria
-    // usar variavel que começa em 1 segundo e vai reduzindo conforme qtd de bolas
-    // mesmo esquema da altura da bola na animacao
+//  to do: 

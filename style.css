@@ -16,7 +16,6 @@ body {
     display: flex;
     flex-direction: column;
     height: 100vh;
-    /* background: rgb(144,137,250); */
     background: linear-gradient(2deg, rgb(120 114 215) 0%, rgb(166 166 255) 35%, rgb(136 255 231) 100%);
     background-color: rgb(30 195 253 / 85%);
 }
@@ -172,37 +171,37 @@ footer {
 }
 
 /* MODAIS ESPECÍFICOS */
-.vermelho {
+.azul {
     border: double 10px;
-    background-color: white;
-    color: red;
+    background-color:black;
+    color: rgb(0 206 255);
 }
 
-.vermelho button {
-    background: red;
-    color: whitesmoke; 
+.azul button {
+    background: rgb(0 206 255);
+    color: black; 
 }
 
-.preto {
+.amarelo {
     border: double 10px;
-    background-color: white;
-    color: black;
+    background-color: black;
+    color: yellow;
 }
 
-.preto button {
-    background: black;
-    color: whitesmoke; 
+.amarelo button {
+    background: yellow;
+    color: black; 
 }
 
 .empate {
     border: double 10px;
-    background-color: whitesmoke;
-    color: gray;
+    background-color: black;
+    color: white;
 }
 
 .empate button {
-    background: gray;
-    color: whitesmoke; 
+    background: white;
+    color: black; 
 }
 
 .hidden {
