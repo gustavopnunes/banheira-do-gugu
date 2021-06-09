@@ -197,6 +197,9 @@ const criarModal = (ganhador) => {// recebe vermelho, preto ou empate
             bolas[i].remove()
         }
         acc = 0;
+        for ( let i = 0; i < mapa.length; i++ ) {
+           mapa[i] = mapa[i].map( (item) => item = "e" )
+        }
         return getModal.remove()
     })
 
