@@ -20,6 +20,13 @@ let qtdBolasNasColunas = [0, 0, 0, 0, 0, 0, 0];
 // v = bola vermelha
 // p = bola preta
 
+const audioFundo = document.querySelector("#audio-fundo");
+
+window.onload = function() {
+    audioFundo.play()
+};
+
+
 // SECAO FELIPE //
 
 // função verificadora de vitória
