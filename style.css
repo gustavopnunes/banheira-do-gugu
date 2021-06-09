@@ -3,9 +3,6 @@ body, h1, div, p{
     padding: 0;
     text-decoration: none;
     box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 :root {
@@ -13,10 +10,103 @@ body, h1, div, p{
 }
 
 body {
+    font-family: sans-serif;
     display: flex;
-    flex-direction: column;
+    align-items: center;
     height: 100vh;
-    background-color: rgb(173, 173, 173);
+    flex-direction: column;
+    justify-content: space-between;
+    background: rgb(0,189,255);
+    background: linear-gradient(180deg, rgba(0,189,255,1) 0%, rgba(0,249,255,0.7511379551820728) 35%, rgba(0,91,255,1) 100%);
+}
+
+header {
+    margin: 0 auto;
+    width: 100%;
+    text-align: center;
+}
+
+header .logo {
+    margin-top: 48px;
+    width: 50%;
+    max-width: 340px;
+    margin: 0 auto;
+}
+
+.jogadores {
+    display: flex;
+    width: 100%;
+    max-width: 460px;
+    justify-content: space-around;
+}
+
+.jogadores img {
+    width: 100%;
+    height: 100%;
+}
+
+.jogador-turno {
+    animation: rodarRosto 4s infinite;
+}
+
+@keyframes rodarRosto {
+    0% {
+        transform: rotate(0deg);
+    }
+    50% {
+        transform: rotate(360deg);
+    }
+}
+
+.frase-turno {
+    color: white;
+    text-shadow: 2px 2px 0 #4074b5, 2px -2px 0 #4074b5, -2px 2px 0 #4074b5, -2px -2px 0 #4074b5, 2px 0px 0 #4074b5, 0px 2px 0 #4074b5, -2px 0px 0 #4074b5, 0px -2px 0 #4074b5, 2px 2px 0px rgba(255,49,85,0), 2px 2px 0px rgba(255,49,85,0);
+}
+
+.espaco-rosto {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.espaco-rostoM {
+    background-color: rgba(255, 255, 0, 0.746)
+}
+.espaco-rostoH {
+    background-color: blue;
+}
+
+@-webkit-keyframes bgChanging {
+    0%{background-position:49% 0%}
+    50%{background-position:52% 100%}
+    100%{background-position:49% 0%}
+}
+@-moz-keyframes bgChanging {
+    0% {
+        background-position:49% 0%
+    }
+    
+    50% {
+        background-position:52% 100%
+    }
+    100% { background-position:49% 0%
+    }
+}
+@keyframes bgChanging {
+    0% { 
+        background-position:49% 0%
+    }
+
+    50% {
+        background-position:52% 100%
+    }
+    100% {
+        background-position:49% 0%
+    }
 }
 
 .container {
@@ -49,7 +139,7 @@ h1 {
 .bola {
     border-radius: 50%;
     width: 100%;
-    height: 30px;
+    height: 16.6%;
     animation: descendo 1s;
 }
 
@@ -59,7 +149,7 @@ h1 {
     opacity: 35%;
     top: 0;
     width: 100%;
-    height: 30px;
+    height: 16.6%;
     border-radius: 50%;
     animation:  disco-correndo .5s;
 }
@@ -83,11 +173,15 @@ h1 {
     }
 }
 
-.bola-vermelha {
+.bola-amarela {
     background-color: rgb(255, 251, 0);
 }
 
-.bola-preta {
+/* preto virou amarelo 
+vermelho virou azul*/
+
+
+.bola-azul {
     background-color:blue;
 }
 
@@ -192,4 +286,39 @@ footer {
 
 .hidden {
     display: none;
+}
+
+@media (min-width: 768px) {
+    .container {
+        width: 460px;
+        height: 280px;
+    }
+
+    .tabuleiro {
+        width: 100%;
+        height: 100%;
+    }
+
+    .colunas {
+        width: 100%;
+        height: 100%;
+    }
+
+    .bola {
+        height: 16.6%;
+    }
+
+    .jogadores {
+        max-width: 620px;
+        justify-content: space-evenly;
+    }
+
+    .frase-turno {
+        font-size: 1.6rem;
+    }
+
+    .espaco-rosto {
+        width: 140px;
+        height: 140px;
+    }
 }

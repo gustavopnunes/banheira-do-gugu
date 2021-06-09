@@ -198,7 +198,7 @@ const criarModal = (ganhador) => {// recebe vermelho, preto ou empate
         }
         acc = 0;
         for ( let i = 0; i < mapa.length; i++ ) {
-           mapa[i] = mapa[i].map( (item) => item = "e" )
+            mapa[i] = mapa[i].map( (item) => item = "e" )
         }
         return getModal.remove()
     })
@@ -227,9 +227,9 @@ const criarModal = (ganhador) => {// recebe vermelho, preto ou empate
 //     disco.classList.add("bola")
 //     if (coluna.childElementCount < 6) {  // só deixa adicionar o disco se a coluna tiver menos que 6 discos
 //         if (corDisco % 2 === 0) {       // define cor de acordo com valor do acumulador (par = preta, impar = vermelha)
-//             disco.classList.add("bola-preta")
+//             disco.classList.add("bola-azul")
 //         } else {
-//             disco.classList.add("bola-vermelha")
+//             disco.classList.add("bola-amarela")
 //         }
 //         let root = document.documentElement;
 //         // esse arranjo tecnico ai em baixo corrige a altura de animacao das bolas, pra elas cairem sempre a partir do mesmo ponto
@@ -266,9 +266,9 @@ const criaListeners = document.querySelectorAll(".colunas").forEach(coluna => {
 let disco = document.createElement("div");
 function suspenderDisco(corDisco, coluna) {
     if (acc % 2 === 0) {       // define cor de acordo com valor do acumulador (par = preta, impar = vermelha)
-        disco.classList.add("bola-preta")
+        disco.classList.add("bola-azul")
     } else {
-        disco.classList.add("bola-vermelha")
+        disco.classList.add("bola-amarela")
     }
     disco.classList.add("disco-suspenso");
     disco.id = "disco-suspenso"
@@ -298,10 +298,50 @@ function adicionarDisco(coluna) {
     qtdBolasNasColunas[coluna]++;
     console.log(qtdBolasNasColunas);
     mapeamento(coluna, linha);
+    trocarRostos();
+    trocarFrase();
+    rodarRosto()
     setTimeout(function() {
         verificaVitoria(linha, coluna, acc);
     },(1000 - qtdBolasNasColunas[coluna]*100));
     
+}
+
+function trocarRostos() {
+    let rostoMeninas = document.querySelector(".rosto-meninas");
+    let rostoMeninos = document.querySelector(".rosto-meninos");
+    if (acc % 2 != 0) {
+        rostoMeninas.src = "assets/img/turno-meninas.png";
+        rostoMeninos.src = "assets/img/meninos.png";
+    } else {
+        rostoMeninas.src = "assets/img/meninas.png";
+        rostoMeninos.src = "assets/img/turno-meninos.png";
+    }
+}
+
+function trocarFrase() {
+    let frase = document.querySelector(".frase-turno")
+    if (acc % 2 != 0) {
+        frase.textContent = "Vez da Sheila do Tchan!"
+    } else {
+        frase.textContent = "Vez do Tiririca!"
+    }
+}
+
+function rodarRosto() {
+    let imgHomems = document.querySelector(".espaco-rostoH");
+    let imgMulheres = document.querySelector(".espaco-rostoM");
+    if (acc % 2 === 0) {
+        imgHomems.classList.add("jogador-turno");
+        if (imgMulheres.classList.contains("jogador-turno")) {
+            imgMulheres.classList.remove("jogador-turno")
+            console.log(imgHomems)
+        }
+    } else {
+        console.log(imgMulheres);
+        imgMulheres.classList.add("jogador-turno");
+        imgHomems.classList.remove("jogador-turno");
+    }
 }
 
 //  SECAO DE TESTES //
