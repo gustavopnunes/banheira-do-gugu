@@ -41,32 +41,38 @@ function verificaVitoria(linha, coluna, acc){
     let indiceLinha=0;
     let indiceColuna=0;
     let x='';
-    let y='';
-    let p=0;
-    let v=0;
+    let y=0;
+    let b=0;
+    console.log(acc)
     if( acc===42){
         ganhador='empate'; criarModal(ganhador);
     }
     for (let i=0; i<7; i++){ //verificação para linha
         if (mapa[5-linha][i] === mapa[5-linha][i+1] && mapa[5-linha][i]!=='e'){
             acc1++;
+            x=mapa[5-linha][i+2];
         }else{
             acc1=0;
         }
+        if (acc1===2 && x==='e'){playAudio("TaTerminando")} 
         if (acc1===3){
-            if(mapa[5-linha][i-1]==='v'){ganhador='vermelho'; criarModal(ganhador);}
-            if(mapa[5-linha][i-1]==='p'){ganhador='preto'; criarModal(ganhador);}    
+            if(mapa[5-linha][i-1]==='y'){ganhador='amarelo'; criarModal(ganhador);}
+            if(mapa[5-linha][i-1]==='b'){ganhador='azul'; criarModal(ganhador);}    
         }
     }
-    for (let i=0; i<5; i++){ // verificação para coluna
-        if (mapa[i][coluna] === mapa[i+1][coluna] && mapa[i][coluna]!=='e'){
+    x='';
+    acc1=0;
+    for (let i=5; i>00; i--){ // verificação para coluna
+        if (mapa[i][coluna] === mapa[i-1][coluna] && mapa[i][coluna]!=='e'){
             acc1++
+            x=mapa[i-2][coluna];
         }else{
-            acc1=0
+            acc1=0;
         }
+        if (acc1===2 && x==='e'){playAudio("TaTerminando")} 
         if (acc1===3){
-            if(mapa [i-1][coluna]==='v'){ganhador = 'vermelho'; criarModal(ganhador);}
-            if(mapa [i-1][coluna]==='p'){ganhador = 'preto'; criarModal(ganhador);}
+            if(mapa [i-1][coluna]==='y'){ganhador = 'amarelo'; criarModal(ganhador);}
+            if(mapa [i-1][coluna]==='b'){ganhador = 'azul'; criarModal(ganhador);}
         }
     }
     // lógica para verificação de diagonais:
@@ -80,25 +86,25 @@ function verificaVitoria(linha, coluna, acc){
             }
         }
     }
-    console.log('indiceLinha: '+indiceLinha+', indiceColuna: '+indiceColuna)
     for (let i=0; i<7; i++){
-        if ((indiceLinha-i)>=0 && (indiceColuna-i)>=0 && mapa[indiceLinha-i][indiceColuna-i]==='p'){
-            p++;
-            v=0;
-        }else if((indiceLinha-i)>=0 && (indiceColuna-i)>=0 && mapa[indiceLinha-i][indiceColuna-i]==='v'){
-            v++;
-            p=0;
-        }        
-        if(v>3){
-            ganhador = 'vermelho'; 
+        if ((indiceLinha-i)>=0 && (indiceColuna-i)>=0 && mapa[indiceLinha-i][indiceColuna-i]==='b'){
+            b++;
+            y=0;
+        }else if((indiceLinha-i)>=0 && (indiceColuna-i)>=0 && mapa[indiceLinha-i][indiceColuna-i]==='y'){
+            y++;
+            b=0;
+        }
+        if (b===3 || y===3){playAudio("TaTerminando")}        
+        if(y>3){
+            ganhador = 'amarelo'; 
             criarModal(ganhador);
-        }else if(p>3){
-            ganhador = 'preto';
+        }else if(b>3){
+            ganhador = 'azul';
             criarModal(ganhador);
         }
     }
-    p=0;
-    v=0;
+    y=0;
+    b=0;
     // diagonal oposta:
     for (let i=0; i<7; i++){
         if((5-linha-i)>=0 && (coluna+i)<7){
@@ -108,24 +114,32 @@ function verificaVitoria(linha, coluna, acc){
             }
         }
     }
+
     for (let i=0; i<7; i++){
-        if ((indiceLinha+i)<6 && (indiceColuna-i)>=0 && mapa[indiceLinha+i][indiceColuna-i]==='p'){
-            p++
-            v=0;
-        }else if(p>3){
-            ganhador='preto';
-            criarModal(ganhador);
+        if ((indiceLinha+i)<6 && (indiceColuna-i)>=0 && mapa[indiceLinha+i][indiceColuna-i]==='b'){
+            b++
+            y=0;
         }
-        if ((indiceLinha+i)<6 && (indiceColuna-i)>=0 && mapa[indiceLinha+i][indiceColuna-i]==='v'){
-            v++
-            p=0;
-        }else if(v>3){
-            ganhador='vermelho';
+        if ((indiceLinha+i)<6 && (indiceColuna-i)>=0 && mapa[indiceLinha+i][indiceColuna-i]==='y'){
+            y++
+            b=0;
+        }
+        if (b===3 || y===3){playAudio("TaTerminando")}
+        if(b>3){
+            ganhador='azul';
+            criarModal(ganhador);
+        }else if(y>3){
+            ganhador='amarelo';
             criarModal(ganhador);
         }
     }
-}
 
+    if( acc===7){playAudio('JaPegouUm')}
+    if( acc===4 || acc===18 || acc===26){playAudio('ElaEhForte');}
+    if( acc===9){playAudio('EhPraValer');}
+    if( acc===14){playAudio('CadeORelogio');}
+    if( acc===23){playAudio('OpaMaisUm');}
+}
 // SECAO VILSON 
 
 // função pra mapear a caixa e passar pro array 
@@ -139,12 +153,11 @@ const mapeamento = (coluna, bolasNaColuna) => { // vai receber coluna e quantida
     // alterar valores no array de acordo com coluna e linha
     if ( celula === "e") {
         if( acc % 2 === 0 ) {
-            mapa[linha][coluna] = "b"
-        } else {
             mapa[linha][coluna] = "y"
+        } else {
+            mapa[linha][coluna] = "b"
         }
     }
-
 }
 
 // funcao criar modal
@@ -185,9 +198,9 @@ const criarModal = (ganhador) => {// recebe vermelho, preto ou empate
     let text = document.createElement("p");
     // preenche modal de acordo com parametro recebido
     if ( ganhador === "azul" ) {
-        text.innerText = "Ponto para as mulheres!"
-    } else if ( ganhador === "amarelo" ) {
         text.innerText = "Ponto para os homens!"
+    } else if ( ganhador === "amarelo" ) {
+        text.innerText = "Ponto para as mulheres!"
     } else {
         text.innerText = "Todo mundo saiu perdendo e você é um Bananão"
     }
@@ -205,15 +218,15 @@ const criarModal = (ganhador) => {// recebe vermelho, preto ou empate
         }
         acc = 0;
         for ( let i = 0; i < mapa.length; i++ ) {
-           mapa[i] = mapa[i].map( (item) => item = "e" )
+            mapa[i] = mapa[i].map( (item) => item = "e" )
         }
         return getModal.remove()
     })
 
-    if (ganhador === "vermelho") {
+    if (ganhador === "azul") {
         playAudio("ponto")
     }
-    else if ( ganhador === "preto" ) {
+    else if ( ganhador === "amarelo" ) {
         playAudio("ponto-mulheres")
     }
     else {
@@ -276,9 +289,9 @@ titulo.addEventListener("click", () => {
 //     disco.classList.add("bola")
 //     if (coluna.childElementCount < 6) {  // só deixa adicionar o disco se a coluna tiver menos que 6 discos
 //         if (corDisco % 2 === 0) {       // define cor de acordo com valor do acumulador (par = preta, impar = vermelha)
-//             disco.classList.add("bola-preta")
+//             disco.classList.add("bola-azul")
 //         } else {
-//             disco.classList.add("bola-vermelha")
+//             disco.classList.add("bola-amarela")
 //         }
 //         let root = document.documentElement;
 //         // esse arranjo tecnico ai em baixo corrige a altura de animacao das bolas, pra elas cairem sempre a partir do mesmo ponto
@@ -315,9 +328,9 @@ const criaListeners = document.querySelectorAll(".colunas").forEach(coluna => {
 let disco = document.createElement("div");
 function suspenderDisco(corDisco, coluna) {
     if (acc % 2 === 0) {       // define cor de acordo com valor do acumulador (par = preta, impar = vermelha)
-        disco.classList.add("bola-preta")
+        disco.classList.add("bola-azul")
     } else {
-        disco.classList.add("bola-vermelha")
+        disco.classList.add("bola-amarela")
     }
     disco.classList.add("disco-suspenso");
     disco.id = "disco-suspenso"
@@ -350,10 +363,50 @@ function adicionarDisco(coluna) {
     qtdBolasNasColunas[coluna]++;
     console.log(qtdBolasNasColunas);
     mapeamento(coluna, linha);
+    trocarRostos();
+    trocarFrase();
+    rodarRosto()
     setTimeout(function() {
         verificaVitoria(linha, coluna, acc);
     },(1000 - qtdBolasNasColunas[coluna]*100));
     
+}
+
+function trocarRostos() {
+    let rostoMeninas = document.querySelector(".rosto-meninas");
+    let rostoMeninos = document.querySelector(".rosto-meninos");
+    if (acc % 2 != 0) {
+        rostoMeninas.src = "assets/img/turno-meninas.png";
+        rostoMeninos.src = "assets/img/meninos.png";
+    } else {
+        rostoMeninas.src = "assets/img/meninas.png";
+        rostoMeninos.src = "assets/img/turno-meninos.png";
+    }
+}
+
+function trocarFrase() {
+    let frase = document.querySelector(".frase-turno")
+    if (acc % 2 != 0) {
+        frase.textContent = "Vez da Sheila do Tchan!"
+    } else {
+        frase.textContent = "Vez do Tiririca!"
+    }
+}
+
+function rodarRosto() {
+    let imgHomems = document.querySelector(".espaco-rostoH");
+    let imgMulheres = document.querySelector(".espaco-rostoM");
+    if (acc % 2 === 0) {
+        imgHomems.classList.add("jogador-turno");
+        if (imgMulheres.classList.contains("jogador-turno")) {
+            imgMulheres.classList.remove("jogador-turno")
+            console.log(imgHomems)
+        }
+    } else {
+        console.log(imgMulheres);
+        imgMulheres.classList.add("jogador-turno");
+        imgHomems.classList.remove("jogador-turno");
+    }
 }
 
 //  SECAO DE TESTES //
