@@ -239,6 +239,7 @@ const criarModal = (ganhador) => {// recebe vermelho, preto ou empate
         for (let i = 0; i < bolas.length; i++) {
             bolas[i].remove()
         }
+        qtdBolasNasColunas=[0,0,0,0,0,0,0];
         acc = 0;
         for ( let i = 0; i < mapa.length; i++ ) {
             mapa[i] = mapa[i].map( (item) => item = "e" )
