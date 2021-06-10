@@ -158,6 +158,7 @@ function verificaVitoria(linha, coluna, acc) {
     if (z === 0 && acc === 14) { playAudio('CadeORelogio'); }
     if (z === 0 && acc === 23) { playAudio('OpaMaisUm'); }
 }
+
 // SECAO VILSON 
 
 // função pra mapear a caixa e passar pro array 
@@ -286,16 +287,12 @@ const criarModal = (ganhador) => {// recebe vermelho, preto ou empate
     
         if (ganhador === "azul") {
             playAudio("ponto")
-        }
-        else if (ganhador === "amarelo") {
+        } else if (ganhador === "amarelo") {
             playAudio("ponto-mulheres")
-        }
-        else {
+        } else {
             playAudio("")
         }
-    
     }
-        
 }
 
 

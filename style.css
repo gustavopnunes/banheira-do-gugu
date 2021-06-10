@@ -13,15 +13,13 @@ body {
     min-height: 100vh;
     height: max-content;
     font-family: sans-serif;
-    display: flex;
+    background: linear-gradient(180deg, rgba(0,189,255,1) 0%, rgba(0,249,255,0.7511379551820728) 35%, rgba(0,91,255,1) 100%);display: flex;
     align-items: center;
     flex-direction: column;
     justify-content: space-between;
-    background: rgb(0,189,255);
     background: linear-gradient(270deg, rgba(0,189,255,1) 0%, rgba(0,249,255,0.7511379551820728) 35%, rgba(0,91,255,1) 100%);
     background-size: cover;
 }
-
 header {
     position: relative;
     margin: 0 auto;
@@ -36,6 +34,19 @@ header {
     width: 220px;
     margin: 0 auto;
 } */
+
+.container:hover{
+    cursor: pointer;
+}
+.logo:hover{
+    cursor: pointer;
+}
+.espaco-rosto{
+    cursor: pointer;
+}
+button:hover{
+    cursor: pointer;
+}
 
 .jogadores {
     display: flex;
