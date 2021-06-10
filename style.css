@@ -235,8 +235,13 @@ footer {
     border-radius: 10px;
 }
 
+.modal-fundo .modal h3 {
+    text-align: center;
+    text-shadow: 3px 2px 3px #000;
+    font-size: 25px;
+}
 .modal-fundo .modal p {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 700;
     text-align: center;
     font-family: system-ui;
@@ -291,6 +296,18 @@ footer {
     color: black; 
 }
 
+.info {
+    background: linear-gradient(90deg, rgb(0 97 174) 0%, rgba(0,249,255) 50%, rgba(0,91,255,1) 100%);
+    color: whitesmoke;
+    border: 8px rgba(0,91,255,1) ridge;
+    height: 50vh;
+    justify-content: center;
+}
+
+.info p {
+    text-shadow: 3px 2px 3px #000;
+}
+
 .hidden {
     display: none;
 }
@@ -327,5 +344,9 @@ footer {
     .espaco-rosto {
         width: 140px;
         height: 140px;
+    }
+
+    .modal-fundo .modal p {
+        font-size: 25px;
     }
 }

@@ -22,12 +22,6 @@ let qtdBolasNasColunas = [0, 0, 0, 0, 0, 0, 0];
 
 const audioFundo = document.querySelector("#audio-fundo");
 
-window.onload = function() {
-    audioFundo.play()
-    audioFundo.volume = 0.15;
-};
-
-
 // SECAO FELIPE //
 
 // função verificadora de vitória
@@ -187,82 +181,106 @@ const mapeamento = (coluna, bolasNaColuna) => { // vai receber coluna e quantida
 const criarModal = (ganhador) => {// recebe vermelho, preto ou empate
     let myBody = document.querySelector("body")
 
-    //Se tiver alguma tag audio com o id audio-frase ele é deletado
     const getFundoModal = document.querySelector(".modal-fundo")
-    if ( getFundoModal !== null ) {
-        getFundoModal.remove()
-    }
+    
+    //Ele só cria um modal se não tiver nenhum na tela
+    if ( getFundoModal === null ) {
 
-    let fundoModal = document.createElement("div")
-    fundoModal.classList.add("modal-fundo");
-    myBody.appendChild(fundoModal);
-
-    let modal = document.createElement("div");
-    modal.classList.add("modal");
-    modal.classList.add(ganhador)
-    fundoModal.appendChild(modal)
-
-    let figure = document.createElement("figure")
-    modal.appendChild(figure)
-
-    let gif = document.createElement("img")
-    if (ganhador === "empate") {
-        gif.src = "./assets/img/gugu-movimento.gif"
-        gif.alt = "Gugu fazerndo um movimento com a mão ao lado do vocalista do Mamonas Assassínas."
-    } else {
-        gif.src = "./assets/img/gugu.gif"
-        gif.alt = "Gugu arrepiado,com cara expressando êxtase."
-    }
-    figure.appendChild(gif)
-
-    let figcaption = document.createElement("figcaption")
-    figcaption.classList.add("hidden")
-    if (ganhador === "empate") {
-        figcaption.innerText = "Gugu fazendo movimento com a mão."
-    } else {
-        figcaption.innerText = "Gugu feliz."
-    }
-    figure.appendChild(figcaption)
-
-    let text = document.createElement("p");
-    // preenche modal de acordo com parametro recebido
-    if (ganhador === "azul") {
-        text.innerText = "Ponto para os homens!"
-    } else if (ganhador === "amarelo") {
-        text.innerText = "Ponto para as mulheres!"
-    } else {
-        text.innerText = "Todo mundo saiu perdendo e você é um Bananão"
-    }
-    modal.appendChild(text)
-
-    let button = document.createElement("button");
-    button.innerText = "Jogar novamente"
-    modal.appendChild(button)
-
-    button.addEventListener("click", () => {
-        let getModal = document.querySelector(".modal-fundo");
-        let bolas = document.querySelectorAll(".bola")
-        for (let i = 0; i < bolas.length; i++) {
-            bolas[i].remove()
+        let fundoModal = document.createElement("div")
+        fundoModal.classList.add("modal-fundo");
+        myBody.appendChild(fundoModal);
+    
+        let modal = document.createElement("div");
+        modal.classList.add("modal");
+        modal.classList.add(ganhador)
+        fundoModal.appendChild(modal)
+    
+        let figure = document.createElement("figure")
+        modal.appendChild(figure)
+    
+        let gif = document.createElement("img")
+        if (ganhador === "empate") {
+            gif.src = "./assets/img/gugu-movimento.gif"
+            gif.alt = "Gugu fazerndo um movimento com a mão ao lado do vocalista do Mamonas Assassínas."
+        } else {
+            gif.src = "./assets/img/gugu.gif"
+            gif.alt = "Gugu arrepiado,com cara expressando êxtase."
         }
-        acc = 0;
-        for ( let i = 0; i < mapa.length; i++ ) {
-            mapa[i] = mapa[i].map( (item) => item = "e" )
+        figure.appendChild(gif)
+    
+        let figcaption = document.createElement("figcaption")
+        figcaption.classList.add("hidden")
+        if (ganhador === "empate") {
+            figcaption.innerText = "Gugu fazendo movimento com a mão."
+        } else {
+            figcaption.innerText = "Gugu feliz."
         }
-        return getModal.remove()
-    })
+        figure.appendChild(figcaption)
+    
+        let text = document.createElement("p");
+        // preenche modal de acordo com parametro recebido
+        if (ganhador === "azul") {
+            text.innerText = "Ponto para os homens!"
+        } else if (ganhador === "amarelo") {
+            text.innerText = "Ponto para as mulheres!"
+        } else {
+            text.innerText = "Todo mundo saiu perdendo e você é um Bananão"
+        }
+        modal.appendChild(text)
+    
+        let button = document.createElement("button");
+        button.innerText = "Jogar novamente"
+        modal.appendChild(button)
+    
+        button.addEventListener("click", () => {
 
-    if (ganhador === "azul") {
-        playAudio("ponto")
-    }
-    else if (ganhador === "amarelo") {
-        playAudio("ponto-mulheres")
-    }
-    else {
-        playAudio("")
-    }
+            let getModal = document.querySelector(".modal-fundo");
+            let bolas = document.querySelectorAll(".bola")
+            for (let i = 0; i < bolas.length; i++) {
+                bolas[i].remove()
+            }
+            acc = 0;
+            for ( let i = 0; i < mapa.length; i++ ) {
+                mapa[i] = mapa[i].map( (item) => item = "e" )
+            }
 
+            qtdBolasNasColunas = [0,0,0,0,0,0,0]
+
+            const getDivMeninas = document.querySelector(".espaco-rostoH");
+            if ( getDivMeninas.classList.contains("jogador-turno") ) {
+                getDivMeninas.classList.remove("jogador-turno")
+            }
+            const getDivMeninos = document.querySelector(".espaco-rostoM");
+            if ( getDivMeninos.classList.contains("jogador-turno") ) {
+                getDivMeninos.classList.remove("jogador-turno")
+            }
+
+            const getRostoMeninos = document.querySelector(".rosto-meninos");
+            getRostoMeninos.src = "assets/img/meninos.png";
+
+            const getRostoMeninas = document.querySelector(".rosto-meninas");
+            getRostoMeninas.src = "assets/img/meninas.png";
+
+            const getFraseTurno = document.querySelector(".frase-turno");
+            getFraseTurno.innerText = "";
+
+            return getModal.remove()
+        })
+    
+        if (ganhador === "azul") {
+            playAudio("ponto")
+        }
+        else if (ganhador === "amarelo") {
+            playAudio("ponto-mulheres")
+        }
+        else {
+            playAudio("")
+        }
+    
+    }
+        
 }
+
 
 const playAudio = (audio) => {
 
@@ -277,6 +295,10 @@ const playAudio = (audio) => {
     let novoAudio = document.createElement("audio");
     novoAudio.id = "audio-frase"
     audioContainer.appendChild(novoAudio);
+
+    if ( audio === "domingo-legal") {
+        novoAudio.volume = 0.4
+    }
 
     let sourceFrase = document.createElement("source");
     sourceFrase.type = "audio/mpeg"
@@ -303,6 +325,64 @@ const titulo = document.querySelector(".logo")
 titulo.addEventListener("click", () => {
     playAudio("domingo-legal")
 })
+
+const criarModalInfo = (type) => {   // Aqui será inserido um parâmetro de "inicio" ou "info"
+    let myBody = document.querySelector("body")
+
+    //Ele cria um modal quando não tem nenhum na tela (caso de duplo clique em icone)
+    const getFundoModal = document.querySelector(".modal-fundo")
+
+    if ( getFundoModal === null ) {
+
+        let fundoModal = document.createElement("div")
+        fundoModal.classList.add("modal-fundo");
+        myBody.appendChild(fundoModal);
+        
+        let modal = document.createElement("div");
+        modal.classList.add("modal");
+        modal.classList.add("info");
+        fundoModal.appendChild(modal);
+
+        const titulo = document.createElement("h3");
+        titulo.innerText = "Bem vindo a Banheira do Gugu!"
+        modal.appendChild(titulo)
+
+
+
+        // O objetivo do jogo é jogar os sabonetes dentro da banheira, a equipe que colocar 4 sabonetes seguidos em qualquer direção vence.
+        const instrucao = document.createElement("p");
+        instrucao.innerText = "O objetivo do jogo é jogar os sabonetes dentro da banheira, a equipe que colocar 4 sabonetes seguidos em qualquer direção vence!"
+        modal.appendChild(instrucao)
+
+        let button = document.createElement("button");
+
+        if ( type === "inicio" ) {
+            button.innerText = "Começar a partida!"            
+        } else {
+            button.innerText = "Fechar"
+        }
+        modal.appendChild(button)
+
+        if ( type === "inicio" ) {
+            button.addEventListener("click", () => {
+                playAudio("domingo-legal")
+                audioFundo.play();
+                audioFundo.volume = 0.15;
+                let getLogo = document.querySelector(".logo-gigante");
+                getLogo.classList.add("logo-animada")
+            })
+        }
+
+        button.addEventListener("click", () => {
+            let getFundoModal = document.querySelector(".modal-fundo")
+            getFundoModal.remove()
+        })
+
+    }
+
+}
+
+criarModalInfo("inicio")
 
 // SECAO GUSTAVO
 
