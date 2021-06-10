@@ -7,14 +7,10 @@ let mapa = [
     ["e", "e", "e", "e", "e", "e", "e"]
 ];
 
-let acc = 0; // contador. Vai até 42 (empate). Par é preto, impar é vermelho
+let acc = 0; // acumulador. Vai até 42 (empate). Par é azul, impar é amarelo
 
-// em vez de uma variavel pra cada coluna, fiz um array em que cada
-// posicao representa uma coluna de 0 a 6 /Gustavo
+// array em que cada posicao representa uma coluna de 0 a 6
 let qtdBolasNasColunas = [0, 0, 0, 0, 0, 0, 0];
-
-
-// comecar com a preta
 
 // e = espaco vazio
 // v = bola vermelha
@@ -66,6 +62,7 @@ function verificaVitoria(linha, coluna, acc) {
             }
         }
     }
+
     x = '';
     acc1 = 0;
     for (let i = 5; i > 00; i--) { // verificação para coluna
@@ -78,9 +75,9 @@ function verificaVitoria(linha, coluna, acc) {
         if (acc1 === 2 && x === 'e') { playAudio("TaTerminando") }
         if (acc1 === 3) {
             if (mapa[i - 1][coluna] === 'y') {
-                 ganhador = 'amarelo'; 
-                 criarModal(ganhador); 
-                 z = 1; 
+                ganhador = 'amarelo'; 
+                criarModal(ganhador); 
+                z = 1; 
             }
             if (mapa[i - 1][coluna] === 'b') { 
                 ganhador = 'azul'; 
@@ -206,7 +203,7 @@ const mapeamento = (coluna, bolasNaColuna) => { // vai receber coluna e quantida
 }
 
 // funcao criar modal
-const criarModal = (ganhador) => {// recebe vermelho, preto ou empate
+const criarModal = (ganhador) => {// recebe amarelo, azul ou empate
     let myBody = document.querySelector("body")
 
     const getFundoModal = document.querySelector(".modal-fundo")
@@ -282,14 +279,14 @@ const criarModal = (ganhador) => {// recebe vermelho, preto ou empate
         buttonContainer.appendChild(buttonZerar)
     
         buttonZerar.addEventListener("click", () => {
-            return resetarJogo()
-
+            
             const placarMeninos = document.querySelector(".pontos-meninos")
             placarMeninos.innerText = "0" 
-
+            
             const placarMeninas = document.querySelector(".pontos-meninas")
             placarMeninas.innerText = "0" 
-
+            
+            return resetarJogo()
         })
 
         
@@ -301,7 +298,8 @@ const criarModal = (ganhador) => {// recebe vermelho, preto ou empate
         } else {
             playAudio("")
         }
-    }
+    } 
+    incrementarPontos(ganhador);
 }
 
 const resetarJogo = () => {
@@ -356,7 +354,7 @@ const playAudio = (audio) => {
         audioFrase.pause()
         audioFrase.remove()
     }
-
+    
     let novoAudio = document.createElement("audio");
     novoAudio.id = "audio-frase"
     audioContainer.appendChild(novoAudio);
@@ -412,8 +410,6 @@ const criarModalInfo = (type) => {   // Aqui será inserido um parâmetro de "in
         titulo.innerText = "Bem vindo a Banheira do Gugu!"
         modal.appendChild(titulo)
 
-
-
         // O objetivo do jogo é jogar os sabonetes dentro da banheira, a equipe que colocar 4 sabonetes seguidos em qualquer direção vence.
         const instrucao = document.createElement("p");
         instrucao.innerText = "O objetivo do jogo é jogar os sabonetes dentro da banheira, a equipe que colocar 4 sabonetes seguidos em qualquer direção vence!"
@@ -445,62 +441,16 @@ const criarModalInfo = (type) => {   // Aqui será inserido um parâmetro de "in
                     }, 2500);
             })
         }
-
         button.addEventListener("click", () => {
             let getFundoModal = document.querySelector(".modal-fundo")
             getFundoModal.remove()
         })
-
     }
-
 }
 
 criarModalInfo("inicio")
 
 // SECAO GUSTAVO
-
-
-// listener movimentos mouse (teclado opcional)
-// listener colunas
-// verificar se coluna tem espaço
-// se tiver, joga a bola
-// se não não faz nada
-// retorna coluna e quantidade de bolas(linha) e chama a função de mapeamento
-
-// const criaListeners = document.querySelectorAll(".colunas").forEach(coluna => {
-//     coluna.addEventListener("click", () => {
-//         adicionarDisco(acc, coluna)
-//     });
-// });
-
-// function adicionarDisco(corDisco, coluna) {
-//     let disco = document.createElement("div");
-//     let alturaAnimacao = 500;
-//     disco.classList.add("bola")
-//     if (coluna.childElementCount < 6) {  // só deixa adicionar o disco se a coluna tiver menos que 6 discos
-//         if (corDisco % 2 === 0) {       // define cor de acordo com valor do acumulador (par = preta, impar = vermelha)
-//             disco.classList.add("bola-azul")
-//         } else {
-//             disco.classList.add("bola-amarela")
-//         }
-//         let root = document.documentElement;
-//         // esse arranjo tecnico ai em baixo corrige a altura de animacao das bolas, pra elas cairem sempre a partir do mesmo ponto
-//         root.style.setProperty("--altura-animacao", `translateY(-${(alturaAnimacao-100*coluna.childElementCount)}%`);
-//         coluna.prepend(disco);  // adiciona o disco de cima pra baixo e incrementa contador
-//         // daqui pra baixo, a funcao converte as propriedades da coluna atual para inteiros e chama
-//         // a funcao de mapeamento passando essas propriedades como parametro, alem de atualizar a quantidade de bolas
-//         // na coluna atual la no array.
-//         linha = parseInt(coluna.childElementCount-1); // detecta o numero da linha pela quantidade de bolas nela.  
-//         // o "-1" aí em cima é porque a linha vai ser sempre quantidade de elementos (discos) -1
-//         console.log("linha " + linha)
-//         coluna = parseInt(coluna.id);
-//         console.log("coluna " + coluna);
-//         qtdBolasNasColunas[coluna]++;
-//         mapeamento(coluna, linha)
-//         acc++;
-//         console.log(qtdBolasNasColunas)
-//     } 
-// }
 
 const maisListeners = document.querySelectorAll(".colunas").forEach(coluna => {
     coluna.addEventListener("mouseenter", () => {
@@ -529,7 +479,6 @@ function suspenderDisco(corDisco, coluna) {
 
 function adicionarDisco(coluna) {
     if (!disco.classList.contains("disco-suspenso") || (coluna.childElementCount > 6)) {
-        console.log("disco sem classe ou coluna cheia. Impedindo de adicionar");
         return;
     };
 
@@ -540,7 +489,6 @@ function adicionarDisco(coluna) {
     disco.classList.remove("disco-suspenso");
     disco.classList.add("bola");
     let linha = parseInt(coluna.childElementCount - 1); // detecta o numero da linha pela quantidade de bolas nela.  
-    console.log("linha " + linha)
     coluna.prepend(disco);
     disco = document.createElement("div");
     acc++;
@@ -549,9 +497,7 @@ function adicionarDisco(coluna) {
     }
     suspenderDisco(acc, coluna);
     coluna = parseInt(coluna.id);
-    console.log("coluna " + coluna);
     qtdBolasNasColunas[coluna]++;
-    console.log(qtdBolasNasColunas);
     mapeamento(coluna, linha);
     trocarRostos();
     trocarFrase();
@@ -559,7 +505,6 @@ function adicionarDisco(coluna) {
     setTimeout(function() {
         verificaVitoria(linha, coluna, acc);
     }, (1000 - qtdBolasNasColunas[coluna] * 100));
-
 }
 
 function trocarRostos() {
@@ -581,9 +526,6 @@ function trocarFrase() {
     } else {
         frase.textContent = "Vez do Tiririca!"
     } 
-    //  else {
-    //     frase.textContent = "Vez da Sheila do Tchan!"
-    // }
 }
 
 function rodarRosto() {
@@ -593,25 +535,19 @@ function rodarRosto() {
         imgHomems.classList.add("jogador-turno");
         if (imgMulheres.classList.contains("jogador-turno")) {
             imgMulheres.classList.remove("jogador-turno")
-            console.log(imgHomems)
         }
     } else {
-        console.log(imgMulheres);
         imgMulheres.classList.add("jogador-turno");
         imgHomems.classList.remove("jogador-turno");
     }
 }
 
-// setTimeout(function(){ 
-//     let logo = document.querySelector(".logo-animada");
-//     logo.remove()
-//     }, 2500);
-
-// function ocultaLogoAnimada() {
-//     let logo = document.querySelector(".logo-animada");
-//     logo.remove()
-// }
-
-//  SECAO DE TESTES //
-
-//  to do: 
+function incrementarPontos(ganhador) {
+    if (ganhador === "azul") {
+        let pontosMeninos = document.querySelector(".pontos-meninos");
+        pontosMeninos.textContent++;
+    } else if (ganhador === "amarelo") {
+        let pontosMeninas = document.querySelector(".pontos-meninas");
+        pontosMeninas.textContent++;
+    }
+}
