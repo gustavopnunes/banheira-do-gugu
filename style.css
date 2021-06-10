@@ -30,7 +30,7 @@ header {
     text-align: center;
 }
 
-.container:hover, .logo:hover, .espaco-rosto:hover, .button:hover {
+.container:hover, .logo:hover, .espaco-rosto:hover, button:hover {
     cursor: pointer;
 }
 
