@@ -289,15 +289,22 @@ footer {
     font-family: system-ui;
 }
 
+.modal div {
+    display: flex;
+    justify-content: space-around;
+}
+
+
 .modal-fundo .modal button {
     margin: 14px auto;
     padding: 0px 8px;
     display: block;
-    height: 40px;
+    height: 50px;
     border: solid transparent;
     border-radius: 4px;
     font-size: 18px;
     font-weight: 700;
+    width: 110px;
 }
 
 .modal-fundo .modal button:focus {
@@ -390,5 +397,10 @@ footer {
 
     .modal-fundo .modal p {
         font-size: 25px;
+    }
+
+    .modal-fundo .modal button {
+        height: 40px;
+        width: 180px;
     }
 }

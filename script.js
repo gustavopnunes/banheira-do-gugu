@@ -265,51 +265,34 @@ const criarModal = (ganhador) => {// recebe vermelho, preto ou empate
             text.innerText = "Todo mundo saiu perdendo e você é um Bananão"
         }
         modal.appendChild(text)
+
+        let buttonContainer = document.createElement("div")
+        modal.appendChild(buttonContainer)
     
-        let button = document.createElement("button");
-        button.innerText = "Jogar novamente"
-        modal.appendChild(button)
+        let buttonRetry = document.createElement("button");
+        buttonRetry.innerText = "Jogar novamente"
+        buttonContainer.appendChild(buttonRetry)
     
-        button.addEventListener("click", () => {
-
-            let getModal = document.querySelector(".modal-fundo");
-            let bolas = document.querySelectorAll(".bola")
-            for (let i = 0; i < bolas.length; i++) {
-                bolas[i].remove()
-            }
-            acc = 0;
-            for ( let i = 0; i < mapa.length; i++ ) {
-                mapa[i] = mapa[i].map( (item) => item = "e" )
-            }
-
-            qtdBolasNasColunas = [0,0,0,0,0,0,0]
-
-            const getDiscoSuspenso = document.querySelector("#disco-suspenso")
-            if ( getDiscoSuspenso.classList.contains("bola-amarela") ) {
-                getDiscoSuspenso.classList.add("bola-azul")
-                getDiscoSuspenso.classList.remove("bola-amarela")
-            }
-
-            const getDivMeninas = document.querySelector(".espaco-rostoH");
-            if ( getDivMeninas.classList.contains("jogador-turno") ) {
-                getDivMeninas.classList.remove("jogador-turno")
-            }
-            const getDivMeninos = document.querySelector(".espaco-rostoM");
-            if ( getDivMeninos.classList.contains("jogador-turno") ) {
-                getDivMeninos.classList.remove("jogador-turno")
-            }
-
-            const getRostoMeninos = document.querySelector(".rosto-meninos");
-            getRostoMeninos.src = "assets/img/meninos.png";
-
-            const getRostoMeninas = document.querySelector(".rosto-meninas");
-            getRostoMeninas.src = "assets/img/meninas.png";
-
-            const getFraseTurno = document.querySelector(".frase-turno");
-            getFraseTurno.innerText = "";
-
-            return getModal.remove()
+        buttonRetry.addEventListener("click", () => {
+            return resetarJogo()
         })
+
+        let buttonZerar = document.createElement("button");
+        buttonZerar.innerText = "Reiniciar placar"
+        buttonContainer.appendChild(buttonZerar)
+    
+        buttonZerar.addEventListener("click", () => {
+            return resetarJogo()
+
+            const placarMeninos = document.querySelector(".pontos-meninos")
+            placarMeninos.innerText = "0" 
+
+            const placarMeninas = document.querySelector(".pontos-meninas")
+            placarMeninas.innerText = "0" 
+
+        })
+
+        
     
         if (ganhador === "azul") {
             playAudio("ponto")
@@ -319,6 +302,47 @@ const criarModal = (ganhador) => {// recebe vermelho, preto ou empate
             playAudio("")
         }
     }
+}
+
+const resetarJogo = () => {
+    let getModal = document.querySelector(".modal-fundo");
+    let bolas = document.querySelectorAll(".bola")
+    for (let i = 0; i < bolas.length; i++) {
+        bolas[i].remove()
+    }
+    acc = 0;
+    for ( let i = 0; i < mapa.length; i++ ) {
+        mapa[i] = mapa[i].map( (item) => item = "e" )
+    }
+
+    qtdBolasNasColunas = [0,0,0,0,0,0,0]
+
+    const getDiscoSuspenso = document.querySelector("#disco-suspenso")
+    if ( getDiscoSuspenso.classList.contains("bola-amarela") ) {
+        getDiscoSuspenso.classList.add("bola-azul")
+        getDiscoSuspenso.classList.remove("bola-amarela")
+    }
+
+    const getDivMeninas = document.querySelector(".espaco-rostoH");
+    if ( getDivMeninas.classList.contains("jogador-turno") ) {
+        getDivMeninas.classList.remove("jogador-turno")
+    }
+    const getDivMeninos = document.querySelector(".espaco-rostoM");
+    if ( getDivMeninos.classList.contains("jogador-turno") ) {
+        getDivMeninos.classList.remove("jogador-turno")
+    }
+
+    const getRostoMeninos = document.querySelector(".rosto-meninos");
+    getRostoMeninos.src = "assets/img/meninos.png";
+
+    const getRostoMeninas = document.querySelector(".rosto-meninas");
+    getRostoMeninas.src = "assets/img/meninas.png";
+
+    const getFraseTurno = document.querySelector(".frase-turno");
+    getFraseTurno.innerText = "";
+
+    return getModal.remove()
+
 }
 
 
