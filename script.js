@@ -257,6 +257,12 @@ const criarModal = (ganhador) => {// recebe vermelho, preto ou empate
 
             qtdBolasNasColunas = [0,0,0,0,0,0,0]
 
+            const getDiscoSuspenso = document.querySelector("#disco-suspenso")
+            if ( getDiscoSuspenso.classList.contains("bola-amarela") ) {
+                getDiscoSuspenso.classList.add("bola-azul")
+                getDiscoSuspenso.classList.remove("bola-amarela")
+            }
+
             const getDivMeninas = document.querySelector(".espaco-rostoH");
             if ( getDivMeninas.classList.contains("jogador-turno") ) {
                 getDivMeninas.classList.remove("jogador-turno")
