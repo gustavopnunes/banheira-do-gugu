@@ -159,6 +159,27 @@ function verificaVitoria(linha, coluna, acc) {
     if (z === 0 && acc === 23) { playAudio('OpaMaisUm'); }
 }
 
+
+let easterScheila = document.querySelector(".espaco-rostoM");
+easterScheila.addEventListener("click", () => {
+    easterEgg("easter-scheila");
+});
+let easterTiririca = document.querySelector(".espaco-rostoH");
+easterTiririca.addEventListener("click", () => {
+    easterEgg("easter-tiririca");
+});
+function easterEgg(audio){
+    const audioContainer = document.querySelector(".audio-container")
+    let audioEaster = document.createElement("audio");
+    audioEaster.id = "audio-easter"
+    audioContainer.appendChild(audioEaster);
+    let sourceEaster = document.createElement("source");
+    sourceEaster.type = "audio/mpeg"
+    sourceEaster.src = `assets/audio/${audio}.mp3`
+    audioEaster.appendChild(sourceEaster)
+    return audioEaster.play();
+}
+
 // SECAO VILSON 
 
 // função pra mapear a caixa e passar pro array 
