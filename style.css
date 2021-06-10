@@ -10,26 +10,40 @@ body, h1, div, p{
 }
 
 body {
-    font-family: sans-serif;
-    height: max-content;
     min-height: 100vh;
+    height: max-content;
+    font-family: sans-serif;
     background: linear-gradient(180deg, rgba(0,189,255,1) 0%, rgba(0,249,255,0.7511379551820728) 35%, rgba(0,91,255,1) 100%);display: flex;
     align-items: center;
-    height: max-content;
     flex-direction: column;
     justify-content: space-between;
+    background: linear-gradient(270deg, rgba(0,189,255,1) 0%, rgba(0,249,255,0.7511379551820728) 35%, rgba(0,91,255,1) 100%);
+    background-size: cover;
 }
 header {
+    position: relative;
     margin: 0 auto;
     width: 100%;
     text-align: center;
 }
 
 header .logo {
+    opacity: 0;
     margin-top: 48px;
-    width: 50%;
-    max-width: 340px;
+    width: 240px;
     margin: 0 auto;
+}
+.container:hover{
+    cursor: pointer;
+}
+.logo:hover{
+    cursor: pointer;
+}
+.espaco-rosto{
+    cursor: pointer;
+}
+button:hover{
+    cursor: pointer;
 }
 
 .jogadores {
@@ -42,6 +56,28 @@ header .logo {
 .jogadores img {
     width: 100%;
     height: 100%;
+}
+
+.logo-animada {
+    /* opacity: 0%; */
+    position: absolute;
+    width: 1500%;
+    top: 49%;
+    right: 50%;
+    transform: translate(50%, -50%);
+    z-index: 1;
+    animation: logoAnimada 2s forwards;
+}
+
+@keyframes logoAnimada {
+    100% {
+        width: 240px;
+    }
+}
+
+.texto {
+    margin: 8px auto;
+    height: 32px;
 }
 
 .jogador-turno {
@@ -112,7 +148,7 @@ header .logo {
     width: 300px;
     height: 230px;
     min-height: 230px;
-    background-image: url(assets/img/bolhas1.jpg);
+    background-image: url(assets/img/bolhas.jpg);
     background-repeat: repeat;
     opacity: 95%;
     border-radius: 10%;
@@ -136,7 +172,7 @@ h1 {
     justify-content: flex-end;
     display: flex;
     border-right: 1.5px dashed #c5c5c5;
-    align-items: flex-end;
+    align-items: center;
     position: relative;
 }
 .colunas:last-child{
@@ -233,8 +269,13 @@ footer {
     border-radius: 10px;
 }
 
+.modal-fundo .modal h3 {
+    text-align: center;
+    text-shadow: 3px 2px 3px #000;
+    font-size: 25px;
+}
 .modal-fundo .modal p {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 700;
     text-align: center;
     font-family: system-ui;
@@ -289,6 +330,18 @@ footer {
     color: black; 
 }
 
+.info {
+    background: linear-gradient(90deg, rgb(0 97 174) 0%, rgba(0,249,255) 50%, rgba(0,91,255,1) 100%);
+    color: whitesmoke;
+    border: 8px rgba(0,91,255,1) ridge;
+    height: 50vh;
+    justify-content: center;
+}
+
+.info p {
+    text-shadow: 3px 2px 3px #000;
+}
+
 .hidden {
     display: none;
 }
@@ -325,5 +378,9 @@ footer {
     .espaco-rosto {
         width: 140px;
         height: 140px;
+    }
+
+    .modal-fundo .modal p {
+        font-size: 25px;
     }
 }
