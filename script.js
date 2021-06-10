@@ -107,6 +107,9 @@ function verificaVitoria(linha, coluna, acc) {
         } else if ((indiceLinha - i) >= 0 && (indiceColuna - i) >= 0 && mapa[indiceLinha - i][indiceColuna - i] === 'y') {
             y++;
             b = 0;
+        } else {
+            y = 0;
+            b = 0;
         }
         if (b === 3 || y === 3) { playAudio("TaTerminando") }
         if (y > 3) {
@@ -135,9 +138,11 @@ function verificaVitoria(linha, coluna, acc) {
         if ((indiceLinha + i) < 6 && (indiceColuna - i) >= 0 && mapa[indiceLinha + i][indiceColuna - i] === 'b') {
             b++
             y = 0;
-        }
-        if ((indiceLinha + i) < 6 && (indiceColuna - i) >= 0 && mapa[indiceLinha + i][indiceColuna - i] === 'y') {
+        } else if ((indiceLinha + i) < 6 && (indiceColuna - i) >= 0 && mapa[indiceLinha + i][indiceColuna - i] === 'y') {
             y++
+            b = 0;
+        } else {
+            y = 0;
             b = 0;
         }
         if (b === 3 || y === 3) { playAudio("TaTerminando") }
@@ -303,6 +308,7 @@ const playAudio = (audio) => {
     //Se tiver alguma tag audio com o id audio-frase ele é deletado
     let audioFrase = document.querySelector("#audio-frase")
     if (audioFrase !== null) {
+        audioFrase.pause()
         audioFrase.remove()
     }
 
