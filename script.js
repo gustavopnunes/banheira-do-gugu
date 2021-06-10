@@ -164,6 +164,12 @@ const mapeamento = (coluna, bolasNaColuna) => { // vai receber coluna e quantida
 const criarModal = (ganhador) => {// recebe vermelho, preto ou empate
     let myBody = document.querySelector("body")
 
+    //Se tiver alguma tag audio com o id audio-frase ele é deletado
+    const getFundoModal = document.querySelector(".modal-fundo")
+    if ( getFundoModal !== null ) {
+        getFundoModal.remove()
+    }
+
     let fundoModal = document.createElement("div")
     fundoModal.classList.add("modal-fundo");
     myBody.appendChild(fundoModal);
