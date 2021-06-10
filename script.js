@@ -158,6 +158,7 @@ function verificaVitoria(linha, coluna, acc) {
     if (z === 0 && acc === 14) { playAudio('CadeORelogio'); }
     if (z === 0 && acc === 23) { playAudio('OpaMaisUm'); }
 }
+
 // SECAO VILSON 
 
 // função pra mapear a caixa e passar pro array 
