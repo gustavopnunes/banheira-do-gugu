@@ -20,6 +20,14 @@ let qtdBolasNasColunas = [0, 0, 0, 0, 0, 0, 0];
 // v = bola vermelha
 // p = bola preta
 
+const audioFundo = document.querySelector("#audio-fundo");
+
+window.onload = function() {
+    audioFundo.play()
+    audioFundo.volume = 0.15;
+};
+
+
 // SECAO FELIPE //
 
 // função verificadora de vitória
@@ -27,6 +35,7 @@ let qtdBolasNasColunas = [0, 0, 0, 0, 0, 0, 0];
 //  recebe array e procura por condicoes de vitória
 //  retorna vitoria ou nada (em caso de nada, segue o jogo)
 //  em caso de vitoria, chama um modal
+// também gera áudios pré-definidos
 
 function verificaVitoria(linha, coluna, acc) {
     let acc1 = 0;
@@ -231,8 +240,8 @@ const criarModal = (ganhador) => {// recebe vermelho, preto ou empate
             bolas[i].remove()
         }
         acc = 0;
-        for (let i = 0; i < mapa.length; i++) {
-            mapa[i] = mapa[i].map((item) => item = "e")
+        for ( let i = 0; i < mapa.length; i++ ) {
+            mapa[i] = mapa[i].map( (item) => item = "e" )
         }
         return getModal.remove()
     })
@@ -271,11 +280,19 @@ const playAudio = (audio) => {
     novoAudio.appendChild(sourceFrase)
 
     audioFrase = document.querySelector("#audio-frase")
-
+    if(audio==='valendo'){audioFrase.volume = 0.4;}
+    if(audio==='ElaEhForte'){audioFrase.volume = 1;}
+    if(audio==='JaPegouUm'){audioFrase.volume = 0.8;}
+    if(audio==='EhPraValer'){audioFrase.volume = 1;}
+    if(audio==='TaTerminando'){audioFrase.volume = 1}
+    if(audio==='CadeORelogio'){audioFrase.volume = 1}
+    if(audio==='OpaMaisUm'){audioFrase.volume = 0.8}
+    if(audio==='ponto'){audioFrase.volume = 0.4}
+    if(audio==='ponto-mulheres'){audioFrase.volume = 0.5}
     return audioFrase.play()
 }
 
-const titulo = document.querySelector(".titulo")
+const titulo = document.querySelector(".logo")
 
 titulo.addEventListener("click", () => {
     playAudio("domingo-legal")
@@ -303,9 +320,9 @@ titulo.addEventListener("click", () => {
 //     disco.classList.add("bola")
 //     if (coluna.childElementCount < 6) {  // só deixa adicionar o disco se a coluna tiver menos que 6 discos
 //         if (corDisco % 2 === 0) {       // define cor de acordo com valor do acumulador (par = preta, impar = vermelha)
-//             disco.classList.add("bola-preta")
+//             disco.classList.add("bola-azul")
 //         } else {
-//             disco.classList.add("bola-vermelha")
+//             disco.classList.add("bola-amarela")
 //         }
 //         let root = document.documentElement;
 //         // esse arranjo tecnico ai em baixo corrige a altura de animacao das bolas, pra elas cairem sempre a partir do mesmo ponto
@@ -342,9 +359,9 @@ const criaListeners = document.querySelectorAll(".colunas").forEach(coluna => {
 let disco = document.createElement("div");
 function suspenderDisco(corDisco, coluna) {
     if (acc % 2 === 0) {       // define cor de acordo com valor do acumulador (par = preta, impar = vermelha)
-        disco.classList.add("bola-amarela")
-    } else {
         disco.classList.add("bola-azul")
+    } else {
+        disco.classList.add("bola-amarela")
     }
     disco.classList.add("disco-suspenso");
     disco.id = "disco-suspenso"
@@ -377,10 +394,50 @@ function adicionarDisco(coluna) {
     qtdBolasNasColunas[coluna]++;
     console.log(qtdBolasNasColunas);
     mapeamento(coluna, linha);
-    setTimeout(function () {
+    trocarRostos();
+    trocarFrase();
+    rodarRosto()
+    setTimeout(function() {
         verificaVitoria(linha, coluna, acc);
     }, (1000 - qtdBolasNasColunas[coluna] * 100));
 
+}
+
+function trocarRostos() {
+    let rostoMeninas = document.querySelector(".rosto-meninas");
+    let rostoMeninos = document.querySelector(".rosto-meninos");
+    if (acc % 2 != 0) {
+        rostoMeninas.src = "assets/img/turno-meninas.png";
+        rostoMeninos.src = "assets/img/meninos.png";
+    } else {
+        rostoMeninas.src = "assets/img/meninas.png";
+        rostoMeninos.src = "assets/img/turno-meninos.png";
+    }
+}
+
+function trocarFrase() {
+    let frase = document.querySelector(".frase-turno")
+    if (acc % 2 != 0) {
+        frase.textContent = "Vez da Scheila do Tchan!"
+    } else {
+        frase.textContent = "Vez do Tiririca!"
+    }
+}
+
+function rodarRosto() {
+    let imgHomems = document.querySelector(".espaco-rostoH");
+    let imgMulheres = document.querySelector(".espaco-rostoM");
+    if (acc % 2 === 0) {
+        imgHomems.classList.add("jogador-turno");
+        if (imgMulheres.classList.contains("jogador-turno")) {
+            imgMulheres.classList.remove("jogador-turno")
+            console.log(imgHomems)
+        }
+    } else {
+        console.log(imgMulheres);
+        imgMulheres.classList.add("jogador-turno");
+        imgHomems.classList.remove("jogador-turno");
+    }
 }
 
 //  SECAO DE TESTES //
