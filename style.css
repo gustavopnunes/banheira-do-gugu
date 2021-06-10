@@ -182,16 +182,14 @@ h1 {
     }
 }
 
-.bola-amarela {
-    background-color: rgb(255, 251, 0);
+.bola-azul {
+    background-image: url(assets/img/sabonete-azul.png);
+    background-size: cover;
 }
 
-/* preto virou amarelo 
-vermelho virou azul*/
-
-
-.bola-azul {
-    background-color:blue;
+.bola-amarela {
+    background-image: url(assets/img/sabonete-amarelo.png);
+    background-size: cover;
 }
 
 .celula {
