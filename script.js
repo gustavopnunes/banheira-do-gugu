@@ -249,7 +249,7 @@ const playAudio = (audio) => {
     sourceFrase.type = "audio/mpeg"
 
     sourceFrase.src = `./assets/audio/${audio}.mp3`
-     
+    
     novoAudio.appendChild(sourceFrase)
 
     audioFrase = document.querySelector("#audio-frase")
@@ -382,10 +382,10 @@ function trocarRostos() {
 
 function trocarFrase() {
     let frase = document.querySelector(".frase-turno")
-    if (acc % 2 != 0) {
-        frase.textContent = "Vez da Sheila do Tchan!"
-    } else {
+    if (acc % 2 === 0) {
         frase.textContent = "Vez do Tiririca!"
+    } else {
+        frase.textContent = "Vez da Sheila do Tchan!"
     }
 }
 
@@ -403,6 +403,13 @@ function rodarRosto() {
         imgMulheres.classList.add("jogador-turno");
         imgHomems.classList.remove("jogador-turno");
     }
+}
+
+setTimeout(function(){ ocultaLogoAnimada(); }, 2500);
+
+function ocultaLogoAnimada() {
+    let logo = document.querySelector(".logo-animada");
+    logo.remove()
 }
 
 //  SECAO DE TESTES //
