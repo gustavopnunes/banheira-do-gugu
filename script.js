@@ -203,18 +203,28 @@ const criarModal = (ganhador) => {// recebe vermelho, preto ou empate
         if (ganhador === "empate") {
             gif.src = "./assets/img/gugu-movimento.gif"
             gif.alt = "Gugu fazerndo um movimento com a mão ao lado do vocalista do Mamonas Assassínas."
-        } else {
-            gif.src = "./assets/img/gugu.gif"
-            gif.alt = "Gugu arrepiado,com cara expressando êxtase."
         }
+        if ( ganhador === "azul" ) {
+            gif.src = "./assets/img/vitoria-homens.gif"
+            gif.alt = "Tiririca com mulher no colo na banheira do Gugu."
+        }
+        if ( ganhador === "amarelo" ) {
+            gif.src = "./assets/img/vitoria-mulheres.gif"
+            gif.alt = "Dançarinas do Domingo Legal dançando."
+        }
+
         figure.appendChild(gif)
     
         let figcaption = document.createElement("figcaption")
         figcaption.classList.add("hidden")
         if (ganhador === "empate") {
             figcaption.innerText = "Gugu fazendo movimento com a mão."
-        } else {
-            figcaption.innerText = "Gugu feliz."
+        } 
+        if (ganhador === "azul") {
+            figcaption.innerText = "Tiririca na Banheira do Gugu."
+        }
+        if (ganhador === "amarelo") {
+            figcaption.innerText = "Dançarinas do Domingo Legal."
         }
         figure.appendChild(figcaption)
     
