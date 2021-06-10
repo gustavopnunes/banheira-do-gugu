@@ -43,6 +43,7 @@ function verificaVitoria(linha, coluna, acc) {
 
     if (acc === 42) {
         ganhador = 'empate'; criarModal(ganhador);
+        z = 1;
     }
     for (let i = 0; i < 7; i++) { //verificação para linha
         if (mapa[5 - linha][i] === mapa[5 - linha][i + 1] && mapa[5 - linha][i] !== 'e') {
@@ -368,8 +369,16 @@ const criarModalInfo = (type) => {   // Aqui será inserido um parâmetro de "in
                 playAudio("domingo-legal")
                 audioFundo.play();
                 audioFundo.volume = 0.15;
-                let getLogo = document.querySelector(".logo-gigante");
+                let getLogo = document.querySelector(".logo");
+                getLogo.style.opacity = "100%;"
                 getLogo.classList.add("logo-animada")
+                
+                setTimeout(function(){ 
+                    let logoOriginal = document.querySelector(".logo");
+                    // logoOriginal.style.opacity = "100%";
+                    let logo = document.querySelector(".logo-animada");
+                    // logo.remove()
+                    }, 2500);
             })
         }
 
@@ -507,7 +516,10 @@ function trocarFrase() {
         frase.textContent = "Vez da Scheila do Tchan!"
     } else {
         frase.textContent = "Vez do Tiririca!"
-    }
+    } 
+    //  else {
+    //     frase.textContent = "Vez da Sheila do Tchan!"
+    // }
 }
 
 function rodarRosto() {
@@ -525,6 +537,16 @@ function rodarRosto() {
         imgHomems.classList.remove("jogador-turno");
     }
 }
+
+// setTimeout(function(){ 
+//     let logo = document.querySelector(".logo-animada");
+//     logo.remove()
+//     }, 2500);
+
+// function ocultaLogoAnimada() {
+//     let logo = document.querySelector(".logo-animada");
+//     logo.remove()
+// }
 
 //  SECAO DE TESTES //
 
