@@ -1,8 +1,10 @@
-body, h1, div, p{
+body, h1, div, p, a {
     margin: 0;
     padding: 0;
     text-decoration: none;
     box-sizing: border-box;
+    text-decoration: none;
+    color: black;
 }
 
 :root {
@@ -13,7 +15,7 @@ body {
     min-height: 100vh;
     height: max-content;
     font-family: sans-serif;
-    background: linear-gradient(180deg, rgba(0,189,255,1) 0%, rgba(0,249,255,0.7511379551820728) 35%, rgba(0,91,255,1) 100%);display: flex;
+    display: flex;
     align-items: center;
     flex-direction: column;
     justify-content: space-between;
@@ -28,23 +30,7 @@ header {
     text-align: center;
 }
 
-/* header .logo {
-    cursor: pointer;
-    opacity: 0;
-    width: 220px;
-    margin: 0 auto;
-} */
-
-.container:hover{
-    cursor: pointer;
-}
-.logo:hover{
-    cursor: pointer;
-}
-.espaco-rosto{
-    cursor: pointer;
-}
-button:hover{
+.container:hover, .logo:hover, .espaco-rosto:hover, .button:hover {
     cursor: pointer;
 }
 
@@ -84,7 +70,7 @@ button:hover{
 }
 
 .texto {
-    margin: 8px auto;
+    margin: 0 auto;
     height: 32px;
 }
 
@@ -106,7 +92,16 @@ button:hover{
     text-shadow: 2px 2px 0 #4074b5, 2px -2px 0 #4074b5, -2px 2px 0 #4074b5, -2px -2px 0 #4074b5, 2px 0px 0 #4074b5, 0px 2px 0 #4074b5, -2px 0px 0 #4074b5, 0px -2px 0 #4074b5, 2px 2px 0px rgba(255,49,85,0), 2px 2px 0px rgba(255,49,85,0);
 }
 
+.paragrafo-vitorias {
+    margin: 0 100px;
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: white;
+    text-shadow: 2px 2px 0 #4074b5, 2px -2px 0 #4074b5, -2px 2px 0 #4074b5, -2px -2px 0 #4074b5, 2px 0px 0 #4074b5, 0px 2px 0 #4074b5, -2px 0px 0 #4074b5, 0px -2px 0 #4074b5, 2px 2px 0px rgba(255,49,85,0), 2px 2px 0px rgba(255,49,85,0);
+}
+
 .espaco-rosto {
+    flex-direction: column;
     width: 120px;
     height: 120px;
     border-radius: 50%;
@@ -156,8 +151,8 @@ button:hover{
     width: 300px;
     height: 230px;
     min-height: 230px;
-    background-image: url(assets/img/bolhas.jpg);
-    background-repeat: repeat;
+    background-image: url(assets/img/banheira.gif);
+    background-size: cover;
     opacity: 95%;
     border-radius: 10%;
 }
@@ -197,7 +192,7 @@ h1 {
 .disco-suspenso {
     background-color: rgb(214, 216, 218);
     position: absolute;
-    opacity: 35%;
+    opacity: 60%;
     top: 0;
     width: 100%;
     height: 16.6%;
@@ -243,6 +238,8 @@ footer {
     width: 100%;
     margin: 0 auto;
     text-align: center;
+    bottom: 0;
+    font-size: .8rem;
 }
 
 /* ESTILO DOS MODAIS */
@@ -254,7 +251,7 @@ footer {
     top: 0;
     bottom: 0;
     z-index: 1;
-    background: #0000009c;
+    background: #0000006b;
 }
 
 .modal-fundo .modal {

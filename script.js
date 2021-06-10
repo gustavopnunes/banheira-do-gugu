@@ -198,7 +198,7 @@ const mapeamento = (coluna, bolasNaColuna) => { // vai receber coluna e quantida
 }
 
 // funcao criar modal
-const criarModal = (ganhador) => {// recebe vermelho, preto ou empate
+const criarModal = (ganhador) => {// recebe amarelo, azul ou empate
     let myBody = document.querySelector("body")
 
     const getFundoModal = document.querySelector(".modal-fundo")
@@ -311,6 +311,7 @@ const criarModal = (ganhador) => {// recebe vermelho, preto ou empate
             playAudio("")
         }
     } 
+    incrementarPontos(ganhador);
 }
 
 const playAudio = (audio) => {
@@ -322,7 +323,7 @@ const playAudio = (audio) => {
     if (audioFrase !== null) {
         audioFrase.remove()
     }
-
+    
     let novoAudio = document.createElement("audio");
     novoAudio.id = "audio-frase"
     audioContainer.appendChild(novoAudio);
@@ -507,5 +508,15 @@ function rodarRosto() {
     } else {
         imgMulheres.classList.add("jogador-turno");
         imgHomems.classList.remove("jogador-turno");
+    }
+}
+
+function incrementarPontos(ganhador) {
+    if (ganhador === "azul") {
+        let pontosMeninos = document.querySelector(".pontos-meninos");
+        pontosMeninos.textContent++;
+    } else if (ganhador === "amarelo") {
+        let pontosMeninas = document.querySelector(".pontos-meninas");
+        pontosMeninas.textContent++;
     }
 }
