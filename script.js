@@ -296,7 +296,7 @@ const criarModal = (ganhador) => {// recebe amarelo, azul ou empate
         } else if (ganhador === "amarelo") {
             playAudio("ponto-mulheres")
         } else {
-            playAudio("")
+            playAudio("ahhh")
         }
     } 
     incrementarPontos(ganhador);
