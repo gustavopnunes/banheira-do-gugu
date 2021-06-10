@@ -206,7 +206,7 @@ footer {
 /* ESTILO DOS MODAIS */
 
 .modal-fundo {
-    position: absolute;
+    position: fixed;
     left: 0;
     right: 0;
     top: 0;
