@@ -366,14 +366,15 @@ const criarModalInfo = (type) => {   // Aqui será inserido um parâmetro de "in
                 playAudio("domingo-legal")
                 audioFundo.play();
                 audioFundo.volume = 0.15;
-                let getLogo = document.querySelector(".logo-gigante");
+                let getLogo = document.querySelector(".logo");
+                getLogo.style.opacity = "100%;"
                 getLogo.classList.add("logo-animada")
                 
                 setTimeout(function(){ 
                     let logoOriginal = document.querySelector(".logo");
-                    logoOriginal.style.opacity = "100%";
+                    // logoOriginal.style.opacity = "100%";
                     let logo = document.querySelector(".logo-animada");
-                    logo.remove()
+                    // logo.remove()
                     }, 2500);
             })
         }
