@@ -93,14 +93,12 @@ h1 {
     }
 }
 
-.bola-vermelha {
-    /* background-color: rgb(255, 251, 0); */
+.bola-azul {
     background-image: url(assets/img/sabonete-amarelo.png);
     background-size: cover;
 }
 
-.bola-preta {
-    /* background-color:blue; */
+.bola-amarela {
     background-image: url(assets/img/sabonete-azul.png);
     background-size: cover;
 }
