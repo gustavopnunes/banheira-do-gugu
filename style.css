@@ -209,15 +209,6 @@ h1 {
     }
 }
 
-@keyframes disco-correndo {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 70%;
-    }
-}
-
 .bola-azul {
     background-image: url(assets/img/sabonete-azul.png);
     background-size: cover;
