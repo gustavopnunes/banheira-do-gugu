@@ -22,6 +22,7 @@ body {
     background: linear-gradient(270deg, rgba(0,189,255,1) 0%, rgba(0,249,255,0.7511379551820728) 35%, rgba(0,91,255,1) 100%);
     background-size: cover;
 }
+
 header {
     position: relative;
     margin: 0 auto;
@@ -118,35 +119,6 @@ header {
     background-color: blue;
 }
 
-@-webkit-keyframes bgChanging {
-    0%{background-position:49% 0%}
-    50%{background-position:52% 100%}
-    100%{background-position:49% 0%}
-}
-@-moz-keyframes bgChanging {
-    0% {
-        background-position:49% 0%
-    }
-    
-    50% {
-        background-position:52% 100%
-    }
-    100% { background-position:49% 0%
-    }
-}
-@keyframes bgChanging {
-    0% { 
-        background-position:49% 0%
-    }
-
-    50% {
-        background-position:52% 100%
-    }
-    100% {
-        background-position:49% 0%
-    }
-}
-
 .container {
     width: 300px;
     height: 230px;
@@ -196,7 +168,6 @@ h1 {
     width: 100%;
     height: 16.6%;
     border-radius: 50%;
-    animation:  disco-correndo .5s;
 }
 
 /* controla a animacao de descida das bolas */
