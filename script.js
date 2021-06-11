@@ -1,3 +1,11 @@
+// Autores: 
+// Gustavo P. Nunes
+// Vilson Neto
+// Luis Felipe Nunes
+
+// #teamNicholas! 
+// #teamNiceSundayDoGugu
+
 let mapa = [
     ["e", "e", "e", "e", "e", "e", "e"],
     ["e", "e", "e", "e", "e", "e", "e"],
@@ -183,7 +191,6 @@ function easterEgg(audio){
 }
 
 // SECAO VILSON 
-
 // função pra mapear a caixa e passar pro array 
 
 const mapeamento = (coluna, bolasNaColuna) => { // vai receber coluna e quantidade de bolas
@@ -288,8 +295,6 @@ const criarModal = (ganhador) => {// recebe amarelo, azul ou empate
             
             return resetarJogo()
         })
-
-        
     
         if (ganhador === "azul") {
             playAudio("ponto")
@@ -340,9 +345,7 @@ const resetarJogo = () => {
     getFraseTurno.innerText = "";
 
     return getModal.remove()
-
 }
-
 
 const playAudio = (audio) => {
 
@@ -457,7 +460,6 @@ const maisListeners = document.querySelectorAll(".colunas").forEach(coluna => {
         suspenderDisco(acc, coluna)
     });
 });
-
 
 const criaListeners = document.querySelectorAll(".colunas").forEach(coluna => {
     coluna.addEventListener("click", () => {

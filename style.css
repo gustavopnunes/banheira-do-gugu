@@ -64,6 +64,7 @@ header {
     animation: logoAnimada 2s forwards;
 }
 
+/* controla a animação da logo no começo do jogo */
 @keyframes logoAnimada {
     100% {
         width: 260px;
@@ -79,6 +80,7 @@ header {
     animation: rodarRosto 4s infinite;
 }
 
+/* controla o animação dos jogadores durante seu turno */
 @keyframes rodarRosto {
     0% {
         transform: rotate(0deg);
