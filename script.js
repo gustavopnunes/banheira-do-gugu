@@ -58,39 +58,41 @@ function verificaVitoria(linha, coluna, acc) {
         }
         if (acc1 === 2 && x === 'e') { playAudio("TaTerminando") }
         if (acc1 === 3) {
-            if (mapa[5 - linha][i - 1] === 'y') { 
-                ganhador = 'amarelo'; 
-                criarModal(ganhador); 
-                z = 1; 
+            if (mapa[5 - linha][i - 1] === 'y') {
+                ganhador = 'amarelo';
+                criarModal(ganhador);
+                z = 1;
             }
-            if (mapa[5 - linha][i - 1] === 'b') { 
-                ganhador = 'azul'; 
-                criarModal(ganhador); 
-                z = 1; 
+            if (mapa[5 - linha][i - 1] === 'b') {
+                ganhador = 'azul';
+                criarModal(ganhador);
+                z = 1;
             }
         }
     }
 
     x = '';
     acc1 = 0;
-    for (let i = 5; i > 00; i--) { // verificação para coluna
-        if (mapa[i][coluna] === mapa[i - 1][coluna] && mapa[i][coluna] !== 'e') {
-            acc1++
-            x = mapa[i - 2][coluna];
-        } else {
-            acc1 = 0;
-        }
-        if (acc1 === 2 && x === 'e') { playAudio("TaTerminando") }
-        if (acc1 === 3) {
-            if (mapa[i - 1][coluna] === 'y') {
-                ganhador = 'amarelo'; 
-                criarModal(ganhador); 
-                z = 1; 
+    for (let i = 5; i >= 0; i--) { // verificação para coluna
+        if (i - 1 > -1) {
+            if (mapa[i][coluna] === mapa[i - 1][coluna] && mapa[i][coluna] !== 'e') {
+                acc1++
+                if (i > 1) { x = mapa[i - 2][coluna]; }
+            } else {
+                acc1 = 0;
             }
-            if (mapa[i - 1][coluna] === 'b') { 
-                ganhador = 'azul'; 
-                criarModal(ganhador); 
-                z = 1; 
+            if (acc1 === 2 && x === 'e') { playAudio("TaTerminando") }
+            if (acc1 === 3) {
+                if (mapa[i][coluna] === 'y') {
+                    ganhador = 'amarelo';
+                    criarModal(ganhador);
+                    z = 1;
+                }
+                if (mapa[i][coluna] === 'b') {
+                    ganhador = 'azul';
+                    criarModal(ganhador);
+                    z = 1;
+                }
             }
         }
     }
@@ -178,7 +180,7 @@ let easterTiririca = document.querySelector(".espaco-rostoH");
 easterTiririca.addEventListener("click", () => {
     easterEgg("easter-tiririca");
 });
-function easterEgg(audio){
+function easterEgg(audio) {
     const audioContainer = document.querySelector(".audio-container")
     let audioEaster = document.createElement("audio");
     audioEaster.id = "audio-easter"
@@ -214,43 +216,43 @@ const criarModal = (ganhador) => {// recebe amarelo, azul ou empate
     let myBody = document.querySelector("body")
 
     const getFundoModal = document.querySelector(".modal-fundo")
-    
+
     //Ele só cria um modal se não tiver nenhum na tela
-    if ( getFundoModal === null ) {
+    if (getFundoModal === null) {
 
         let fundoModal = document.createElement("div")
         fundoModal.classList.add("modal-fundo");
         myBody.appendChild(fundoModal);
-    
+
         let modal = document.createElement("div");
         modal.classList.add("modal");
         modal.classList.add(ganhador)
         fundoModal.appendChild(modal)
-    
+
         let figure = document.createElement("figure")
         modal.appendChild(figure)
-    
+
         let gif = document.createElement("img")
         if (ganhador === "empate") {
             gif.src = "./assets/img/gugu-movimento.gif"
             gif.alt = "Gugu fazerndo um movimento com a mão ao lado do vocalista do Mamonas Assassínas."
         }
-        if ( ganhador === "azul" ) {
+        if (ganhador === "azul") {
             gif.src = "./assets/img/vitoria-homens.gif"
             gif.alt = "Tiririca com mulher no colo na banheira do Gugu."
         }
-        if ( ganhador === "amarelo" ) {
+        if (ganhador === "amarelo") {
             gif.src = "./assets/img/vitoria-mulheres.gif"
             gif.alt = "Dançarinas do Domingo Legal dançando."
         }
 
         figure.appendChild(gif)
-    
+
         let figcaption = document.createElement("figcaption")
         figcaption.classList.add("hidden")
         if (ganhador === "empate") {
             figcaption.innerText = "Gugu fazendo movimento com a mão."
-        } 
+        }
         if (ganhador === "azul") {
             figcaption.innerText = "Tiririca na Banheira do Gugu."
         }
@@ -258,7 +260,7 @@ const criarModal = (ganhador) => {// recebe amarelo, azul ou empate
             figcaption.innerText = "Dançarinas do Domingo Legal."
         }
         figure.appendChild(figcaption)
-    
+
         let text = document.createElement("p");
         // preenche modal de acordo com parametro recebido
         if (ganhador === "azul") {
@@ -272,11 +274,11 @@ const criarModal = (ganhador) => {// recebe amarelo, azul ou empate
 
         let buttonContainer = document.createElement("div")
         modal.appendChild(buttonContainer)
-    
+
         let buttonRetry = document.createElement("button");
         buttonRetry.innerText = "Jogar novamente"
         buttonContainer.appendChild(buttonRetry)
-    
+
         buttonRetry.addEventListener("click", () => {
             return resetarJogo()
         })
@@ -284,18 +286,18 @@ const criarModal = (ganhador) => {// recebe amarelo, azul ou empate
         let buttonZerar = document.createElement("button");
         buttonZerar.innerText = "Reiniciar placar"
         buttonContainer.appendChild(buttonZerar)
-    
+
         buttonZerar.addEventListener("click", () => {
-            
+
             const placarMeninos = document.querySelector(".pontos-meninos")
-            placarMeninos.innerText = "0" 
-            
+            placarMeninos.innerText = "0"
+
             const placarMeninas = document.querySelector(".pontos-meninas")
-            placarMeninas.innerText = "0" 
-            
+            placarMeninas.innerText = "0"
+
             return resetarJogo()
         })
-    
+
         if (ganhador === "azul") {
             playAudio("ponto")
         } else if (ganhador === "amarelo") {
@@ -303,7 +305,7 @@ const criarModal = (ganhador) => {// recebe amarelo, azul ou empate
         } else {
             playAudio("ahhh")
         }
-    } 
+    }
     incrementarPontos(ganhador);
 }
 
@@ -314,24 +316,24 @@ const resetarJogo = () => {
         bolas[i].remove()
     }
     acc = 0;
-    for ( let i = 0; i < mapa.length; i++ ) {
-        mapa[i] = mapa[i].map( (item) => item = "e" )
+    for (let i = 0; i < mapa.length; i++) {
+        mapa[i] = mapa[i].map((item) => item = "e")
     }
 
-    qtdBolasNasColunas = [0,0,0,0,0,0,0]
+    qtdBolasNasColunas = [0, 0, 0, 0, 0, 0, 0]
 
     const getDiscoSuspenso = document.querySelector("#disco-suspenso")
-    if ( getDiscoSuspenso.classList.contains("bola-amarela") ) {
+    if (getDiscoSuspenso.classList.contains("bola-amarela")) {
         getDiscoSuspenso.classList.add("bola-azul")
         getDiscoSuspenso.classList.remove("bola-amarela")
     }
 
     const getDivMeninas = document.querySelector(".espaco-rostoH");
-    if ( getDivMeninas.classList.contains("jogador-turno") ) {
+    if (getDivMeninas.classList.contains("jogador-turno")) {
         getDivMeninas.classList.remove("jogador-turno")
     }
     const getDivMeninos = document.querySelector(".espaco-rostoM");
-    if ( getDivMeninos.classList.contains("jogador-turno") ) {
+    if (getDivMeninos.classList.contains("jogador-turno")) {
         getDivMeninos.classList.remove("jogador-turno")
     }
 
@@ -357,12 +359,12 @@ const playAudio = (audio) => {
         audioFrase.pause()
         audioFrase.remove()
     }
-    
+
     let novoAudio = document.createElement("audio");
     novoAudio.id = "audio-frase"
     audioContainer.appendChild(novoAudio);
 
-    if ( audio === "domingo-legal") {
+    if (audio === "domingo-legal") {
         novoAudio.volume = 0.4
     }
 
@@ -374,15 +376,15 @@ const playAudio = (audio) => {
     novoAudio.appendChild(sourceFrase)
 
     audioFrase = document.querySelector("#audio-frase")
-    if(audio==='valendo'){audioFrase.volume = 0.4;}
-    if(audio==='ElaEhForte'){audioFrase.volume = 1;}
-    if(audio==='JaPegouUm'){audioFrase.volume = 0.8;}
-    if(audio==='EhPraValer'){audioFrase.volume = 1;}
-    if(audio==='TaTerminando'){audioFrase.volume = 1}
-    if(audio==='CadeORelogio'){audioFrase.volume = 1}
-    if(audio==='OpaMaisUm'){audioFrase.volume = 0.8}
-    if(audio==='ponto'){audioFrase.volume = 0.4}
-    if(audio==='ponto-mulheres'){audioFrase.volume = 0.5}
+    if (audio === 'valendo') { audioFrase.volume = 0.4; }
+    if (audio === 'ElaEhForte') { audioFrase.volume = 1; }
+    if (audio === 'JaPegouUm') { audioFrase.volume = 0.8; }
+    if (audio === 'EhPraValer') { audioFrase.volume = 1; }
+    if (audio === 'TaTerminando') { audioFrase.volume = 1 }
+    if (audio === 'CadeORelogio') { audioFrase.volume = 1 }
+    if (audio === 'OpaMaisUm') { audioFrase.volume = 0.8 }
+    if (audio === 'ponto') { audioFrase.volume = 0.4 }
+    if (audio === 'ponto-mulheres') { audioFrase.volume = 0.5 }
     return audioFrase.play()
 }
 
@@ -398,12 +400,12 @@ const criarModalInfo = (type) => {   // Aqui será inserido um parâmetro de "in
     //Ele cria um modal quando não tem nenhum na tela (caso de duplo clique em icone)
     const getFundoModal = document.querySelector(".modal-fundo")
 
-    if ( getFundoModal === null ) {
+    if (getFundoModal === null) {
 
         let fundoModal = document.createElement("div")
         fundoModal.classList.add("modal-fundo");
         myBody.appendChild(fundoModal);
-        
+
         let modal = document.createElement("div");
         modal.classList.add("modal");
         modal.classList.add("info");
@@ -420,14 +422,14 @@ const criarModalInfo = (type) => {   // Aqui será inserido um parâmetro de "in
 
         let button = document.createElement("button");
 
-        if ( type === "inicio" ) {
-            button.innerText = "Começar a partida!"            
+        if (type === "inicio") {
+            button.innerText = "Começar a partida!"
         } else {
             button.innerText = "Fechar"
         }
         modal.appendChild(button)
 
-        if ( type === "inicio" ) {
+        if (type === "inicio") {
             button.addEventListener("click", () => {
                 playAudio("domingo-legal")
                 audioFundo.play();
@@ -435,13 +437,13 @@ const criarModalInfo = (type) => {   // Aqui será inserido um parâmetro de "in
                 let getLogo = document.querySelector(".logo");
                 getLogo.style.opacity = "100%;"
                 getLogo.classList.add("logo-animada")
-                
-                setTimeout(function(){ 
+
+                setTimeout(function () {
                     let logoOriginal = document.querySelector(".logo");
                     // logoOriginal.style.opacity = "100%";
                     let logo = document.querySelector(".logo-animada");
                     // logo.remove()
-                    }, 2500);
+                }, 2500);
             })
         }
         button.addEventListener("click", () => {
@@ -504,7 +506,7 @@ function adicionarDisco(coluna) {
     trocarRostos();
     trocarFrase();
     rodarRosto()
-    setTimeout(function() {
+    setTimeout(function () {
         verificaVitoria(linha, coluna, acc);
     }, (1000 - qtdBolasNasColunas[coluna] * 100));
 }
@@ -527,7 +529,7 @@ function trocarFrase() {
         frase.textContent = "Vez da Scheila do Tchan!"
     } else {
         frase.textContent = "Vez do Tiririca!"
-    } 
+    }
 }
 
 function rodarRosto() {
